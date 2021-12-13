@@ -1,0 +1,41 @@
+[2021-12-13 11:07:51,693] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 5
+[2021-12-13 11:07:51,696] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 11:07:51,697] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 3
+[2021-12-13 11:07:51,698] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 2
+[2021-12-13 11:07:51,698] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 1
+[2021-12-13 11:07:51,698] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 0
+[2021-12-13 11:09:15,207] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 5
+[2021-12-13 11:09:15,210] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 11:09:15,210] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 3
+[2021-12-13 11:09:15,210] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 2
+[2021-12-13 11:09:15,211] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 1
+[2021-12-13 11:09:15,211] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 0
+[2021-12-13 11:14:29,747] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 5
+[2021-12-13 11:15:48,795] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 14:58:27,817] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 14:58:27,840] INFO [com.hardziyevich.app.dao.impl.CaseDaoImpl: 35] Something happened No results were returned by the query.
+[2021-12-13 15:04:45,882] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:04:45,910] INFO [com.hardziyevich.app.dao.impl.CaseDaoImpl: 35] Something happened No results were returned by the query.
+[2021-12-13 15:05:20,439] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:05:20,466] INFO [com.hardziyevich.app.dao.impl.CaseDaoImpl: 35] Something happened No results were returned by the query.
+[2021-12-13 15:07:07,973] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:07:58,886] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:21:36,875] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:22:17,692] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:23:48,782] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:24:16,195] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:26:22,914] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:28:46,059] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:30:38,253] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:33:51,194] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:35:06,836] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:53:37,130] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:56:45,529] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:57:05,290] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 15:58:01,945] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:02:20,491] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:03:23,158] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:04:44,479] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:08:32,755] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:21:23,702] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:21:23,723] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
