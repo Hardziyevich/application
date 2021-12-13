@@ -1,10 +1,11 @@
 package com.hardziyevich.app;
 
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import com.hardziyevich.app.controller.Handler;
+import com.sun.net.httpserver.HttpServer;
 
-import static com.hardziyevich.app.db.ConnectionPool.*;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 /**
  * Hello world!
@@ -12,14 +13,10 @@ import static com.hardziyevich.app.db.ConnectionPool.*;
  */
 public class App 
 {
-    public static void main( String[] args ) {
-        try (Connection connection = INSTANCE.openConnection();){
-            INSTANCE.name();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            INSTANCE.destroyPool();
-        }
+    public static void main( String[] args ) throws IOException {
+        HttpServer server = HttpServer.create();
+        server.bind(new InetSocketAddress(8081), 0);
+        server.createContext("/", new Handler()::handle);
+        server.start();
     }
 }

@@ -37,3 +37,8 @@
 [2021-12-13 16:03:23,158] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
 [2021-12-13 16:04:44,479] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
 [2021-12-13 16:08:32,755] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:21:23,702] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 16:21:23,723] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-13 22:44:42,148] WARN [com.hardziyevich.app.controller.BaseController: 41] Something happened No enum constant com.hardziyevich.app.controller.BaseController.RequestType.CAPACITOR
+[2021-12-13 22:45:46,804] WARN [com.hardziyevich.app.controller.BaseController: 41] Something happened No enum constant com.hardziyevich.app.controller.BaseController.RequestType.CAPACITOR
+[2021-12-13 23:07:16,757] WARN [com.hardziyevich.app.controller.Handler: 52] Something happened response headers not sent yet
