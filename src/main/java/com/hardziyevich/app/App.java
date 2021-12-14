@@ -16,7 +16,8 @@ public class App
     public static void main( String[] args ) throws IOException {
         HttpServer server = HttpServer.create();
         server.bind(new InetSocketAddress(8081), 0);
-        server.createContext("/", new Handler()::handle);
+        server.createContext("/capacitor", new Handler()::handle);
+        server.createContext("/resistor", new Handler()::handle);
         server.start();
     }
 }

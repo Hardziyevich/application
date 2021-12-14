@@ -1,7 +1,6 @@
 package com.hardziyevich.app.dao.impl;
 
 import com.hardziyevich.app.dao.CaseDao;
-import com.hardziyevich.app.db.ConnectionPool;
 import com.hardziyevich.app.entity.CaseSize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,6 @@ public class CaseDaoImpl implements CaseDao {
             preparedStatement.setObject(2, caseSize.lengthMm());
             preparedStatement.setObject(3, caseSize.widthMm());
             int i = preparedStatement.executeUpdate();
-            System.out.println(i);
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet != null && resultSet.next()) {
                 result = resultSet.getLong("id");
