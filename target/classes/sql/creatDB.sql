@@ -1,3 +1,5 @@
+CREATE SCHEMA component;
+
 CREATE TABLE IF NOT EXISTS operating_temperature
 (
     id        SERIAL PRIMARY KEY,

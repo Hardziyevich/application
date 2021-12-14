@@ -32,14 +32,6 @@ public class Handler {
                 System.out.println(pathURI);
             }
 
-//            JsonObject deserialize;
-//            try (InputStream requestBody = httpExchange.getRequestBody();
-//                 BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody,StandardCharsets.UTF_8))) {
-//                if(reader.ready()) {
-//                    deserialize = (JsonObject) Jsoner.deserialize(reader);
-//                    System.out.println(deserialize.toJson());
-//                }
-//            }
 //            Response response = new Response.Builder()
 //                    .attribute("Pasha", 13)
 //                    .attribute("15", "13")
