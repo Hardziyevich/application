@@ -7,9 +7,13 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.hardziyevich.app.db.ConnectionPool.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ConnectionPoolTest {
@@ -28,7 +32,15 @@ public class ConnectionPoolTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        assertEquals("public",schema);
+        assertEquals("public", schema);
+    }
+
+    @Test()
+    @DisplayName("All connection will lose")
+    void testConnectionPoll() {
+        INSTANCE.destroyPool();
+        INSTANCE.openConnection();
+        assertNotNull(INSTANCE.openConnection());
     }
 
 

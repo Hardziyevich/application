@@ -163,3 +163,134 @@
 [2021-12-15 15:11:55,576] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
 [2021-12-15 15:12:30,350] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
 [2021-12-15 15:13:08,646] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-15 21:44:57,438] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:44:57,450] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:44:57,451] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:44:57,452] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 21:44:57,454] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 0
+[2021-12-15 21:45:13,242] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:45:13,245] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:45:13,246] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:45:13,246] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 21:45:13,246] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 0
+[2021-12-15 21:45:13,247] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around -1
+[2021-12-15 21:47:55,525] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:47:55,573] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:47:55,574] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:47:55,576] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 21:47:55,578] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 0
+[2021-12-15 21:47:55,581] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around -1
+[2021-12-15 21:48:51,284] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:48:51,299] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:48:51,302] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:48:51,303] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 21:48:51,308] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 0
+[2021-12-15 21:48:51,314] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around -1
+[2021-12-15 21:57:13,936] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:57:13,962] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:57:13,964] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:57:13,966] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 21:57:13,968] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 0
+[2021-12-15 21:57:32,345] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 21:57:32,358] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 21:57:32,360] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 21:57:32,361] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 22:00:48,309] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:00:48,321] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 22:00:48,322] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 22:00:48,323] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 22:04:03,615] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:04:03,636] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 22:04:03,640] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 2
+[2021-12-15 22:04:03,642] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 1
+[2021-12-15 22:06:03,984] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:06:58,771] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:08:46,474] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:14:55,860] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:14:55,864] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 22:15:48,376] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:15:48,400] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:16:28,739] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:16:28,742] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:16:28,742] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:16:50,885] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:16:50,886] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:17:09,720] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:17:09,723] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 22:17:50,113] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:17:50,129] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 3
+[2021-12-15 22:18:23,320] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:18:23,323] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given, stay around 4
+[2021-12-15 22:19:57,603] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given, stay around 4
+[2021-12-15 22:19:57,608] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given, stay around 4
+[2021-12-15 22:21:11,315] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:21:11,317] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:22:42,069] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:22:42,069] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:25:22,404] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:25:22,410] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 3
+[2021-12-15 22:25:42,204] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:25:42,211] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 3
+[2021-12-15 22:25:47,205] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 2
+[2021-12-15 22:28:52,532] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:28:52,533] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:28:52,533] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:28:57,554] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 1
+[2021-12-15 22:29:17,495] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:29:17,498] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:29:17,496] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:29:22,510] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 1
+[2021-12-15 22:33:36,617] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 4
+[2021-12-15 22:33:36,630] INFO [com.hardziyevich.app.db.ConnectionPool: 66] Connection was given, stay around 3
+[2021-12-15 22:34:30,548] INFO [com.hardziyevich.app.db.ConnectionPool: 65] Connection was given, stay around 4
+[2021-12-15 22:35:29,543] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given, stay around 4
+[2021-12-15 22:38:06,672] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:40:29,234] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:40:44,683] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:44:12,930] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:44:27,197] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:45:52,128] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:47:14,883] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:48:35,516] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 22:50:27,693] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection was given.
+[2021-12-15 23:08:32,766] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection was given.
+[2021-12-15 23:14:09,431] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given.
+[2021-12-15 23:14:34,653] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given.
+[2021-12-15 23:15:04,830] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given.
+[2021-12-15 23:22:25,715] INFO [com.hardziyevich.app.db.ConnectionPool: 64] Connection was given.
+[2021-12-15 23:26:48,357] INFO [com.hardziyevich.app.db.ConnectionPool: 54] Connection was given.
+[2021-12-15 23:29:49,118] INFO [com.hardziyevich.app.db.ConnectionPool: 54] Connection was given.
+[2021-12-15 23:40:19,686] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:40:27,508] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:41:14,587] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,812] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,850] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,873] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,896] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,920] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:42:18,945] INFO [com.hardziyevich.app.db.ConnectionPool: 53] Connection was given.
+[2021-12-15 23:43:34,114] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:43:34,117] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:43:34,117] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:43:34,118] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:43:34,118] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:43:34,118] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:45:14,258] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:45:48,789] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:45:48,790] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:45:48,791] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:45:48,792] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:45:48,793] INFO [com.hardziyevich.app.db.ConnectionPool: 62] Connection org.postgresql.jdbc.PgConnection@2805d709 was given.
+[2021-12-15 23:46:02,709] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:46:02,711] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:46:02,711] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:46:02,712] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:46:02,712] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:46:02,712] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@fba92d3 was given.
+[2021-12-15 23:47:09,986] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,988] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,988] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,989] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,989] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,989] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@67c33749 was given.
+[2021-12-15 23:47:09,990] INFO [com.hardziyevich.app.db.ConnectionPool: 63] Connection org.postgresql.jdbc.PgConnection@16610890 was given.
