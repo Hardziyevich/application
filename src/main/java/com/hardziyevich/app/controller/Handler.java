@@ -1,16 +1,13 @@
 package com.hardziyevich.app.controller;
 
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
-import com.hardziyevich.app.service.Response;
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
+
+import static com.hardziyevich.app.controller.Constant.HttpResponseStatus.STATUS_NOT_FOUND;
 
 public class Handler {
 
@@ -53,5 +50,10 @@ public class Handler {
 
     void handle(final HttpExchange httpExchange, final Throwable throwable) {
         log.warn("Something happened {}", (Object) throwable.getStackTrace());
+        try {
+            httpExchange.sendResponseHeaders(STATUS_NOT_FOUND,0);
+        } catch (IOException e) {
+            log.warn("Exception while reading request body from JSON {}", e.getMessage());
+        }
     }
 }

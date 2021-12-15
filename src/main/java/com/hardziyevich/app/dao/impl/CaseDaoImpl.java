@@ -48,6 +48,8 @@ public class CaseDaoImpl implements CaseDao {
         try (Connection connection = INSTANCE.openConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CASE)) {
             preparedStatement.setLong(1,caseSize.id());
+            int number = preparedStatement.executeUpdate();
+            System.out.println(number);
         } catch (SQLException e) {
             e.printStackTrace();
         }

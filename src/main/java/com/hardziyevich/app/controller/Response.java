@@ -1,4 +1,4 @@
-package com.hardziyevich.app.service;
+package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 

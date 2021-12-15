@@ -26,7 +26,7 @@ public class CaseDaoImplTest {
 
     @Test
     void testDelete(){
-        CaseSize caseSize = new CaseSize(20,"test",2.0,2.0);
+        CaseSize caseSize = new CaseSize(25,"test",2.0,2.0);
         assertDoesNotThrow(()-> caseDao.delete(caseSize));
     }
 }
