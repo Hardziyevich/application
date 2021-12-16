@@ -2,15 +2,15 @@ package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonKey;
 
-enum Attributes implements JsonKey {
+public enum AttributesCapacitor implements JsonKey {
 
     ID,
-    CASE,
-    TEMP_LOW,
-    TEMP_HIGH,
     VALUE,
     UNIT,
-    VOLTAGE;
+    VOLTAGE,
+    CASE,
+    TEMP_LOW,
+    TEMP_HIGH;
 
     private static final String REG_UNDERSCORE = "_";
     private static final String REG_SCORE = "-";

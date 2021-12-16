@@ -3,11 +3,9 @@ package com.hardziyevich.app.db;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -41,7 +39,6 @@ public enum ConnectionPool {
         int size = poolSizeValue == null ? DEFAULT_POOL_SIZE : Integer.parseInt(poolSizeValue);
         pool = new ArrayBlockingQueue<>(size);
         sourceConnection = new ArrayList<>(size);
-
         for (int i = 0; i < size; i++) {
             creatProxyConnection();
         }
@@ -50,13 +47,14 @@ public enum ConnectionPool {
     /**
      * On the one hand method will return connection from connection poll if connection is existing and valid.
      * On the other hand will create new connection and return that.
+     *
      * @return Connection to database.
      */
     public Connection openConnection() {
         Connection connection = null;
         try {
             connection = pool.poll(1, TimeUnit.SECONDS);
-            if(!(connection != null && connection.isValid(1))){
+            if (!(connection != null && connection.isValid(1))) {
                 creatProxyConnection();
                 connection = openConnection();
             }

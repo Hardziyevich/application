@@ -18,6 +18,13 @@ public final class Response {
         return json;
     }
 
+    @Override
+    public String toString() {
+        return "Response{" +
+                "attributes=" + attributes +
+                '}';
+    }
+
     public static class Builder {
 
         private final Map<String, Object> attributes = new HashMap<>();

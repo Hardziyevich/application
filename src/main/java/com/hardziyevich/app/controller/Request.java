@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hardziyevich.app.controller.Attributes.*;
+import static com.hardziyevich.app.controller.AttributesCapacitor.*;
 
 public final class Request {
     private final long id;
@@ -17,7 +17,7 @@ public final class Request {
     private final String unit;
     private final String voltageRate;
 
-    private final Map<Attributes, String> attributes;
+    private final Map<AttributesCapacitor, String> attributes;
 
     public Request(Builder builder) {
         this.attributes = builder.attributes;
@@ -58,7 +58,7 @@ public final class Request {
         return voltageRate;
     }
 
-    public Map<Attributes, String> getAttributes() {
+    public Map<AttributesCapacitor, String> getAttributes() {
         return attributes;
     }
 
@@ -83,9 +83,9 @@ public final class Request {
         private int valueCapacitor;
         private String unit;
         private String voltageRate;
-        private final Map<Attributes, String> attributes = new HashMap<>();
+        private final Map<AttributesCapacitor, String> attributes = new HashMap<>();
 
-        public Builder attribute(Attributes key, String value) {
+        public Builder attribute(AttributesCapacitor key, String value) {
             attributes.put(key, value);
             return this;
         }
@@ -126,7 +126,7 @@ public final class Request {
         }
 
         public Builder jsonToAttribute(JsonObject jsonObject) {
-            Arrays.stream(Attributes.values())
+            Arrays.stream(AttributesCapacitor.values())
                     .filter(a -> jsonObject.getString(a) != null)
                     .forEach(a -> attributes.put(a, jsonObject.getString(a)));
             return this;
