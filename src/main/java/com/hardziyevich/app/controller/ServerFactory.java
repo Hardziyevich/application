@@ -5,6 +5,4 @@ public class ServerFactory {
     private ServerFactory() {
         throw new UnsupportedOperationException();
     }
-
-
 }

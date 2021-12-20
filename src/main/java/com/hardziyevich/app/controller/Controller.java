@@ -1,6 +1,5 @@
 package com.hardziyevich.app.controller;
 
-import com.github.akarazhev.metaconfig.extension.Validator;
 import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonKey;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -17,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.hardziyevich.app.controller.Constant.HttpMethod.*;
-import static com.hardziyevich.app.controller.Constant.HttpResponseStatus.*;
+import static com.hardziyevich.app.controller.ConstantHttp.HttpMethod.*;
+import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.*;
 
 
 abstract class Controller {
@@ -103,7 +102,6 @@ abstract class Controller {
         for (JsonObject jsonObject : jsonObjects) {
             db.append(jsonObject.toJson());
         }
-        System.out.println(db);
         responseHeaders.add("Content-type", "application/json");
         response(httpExchange, STATUS_OK, db.toString().getBytes(StandardCharsets.UTF_8).length);
         try (OutputStream responseBody = httpExchange.getResponseBody()) {

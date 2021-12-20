@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.URI;
 
-import static com.hardziyevich.app.controller.Constant.HttpResponseStatus.STATUS_NOT_FOUND;
+import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.STATUS_NOT_FOUND;
 
 public class Handler {
 

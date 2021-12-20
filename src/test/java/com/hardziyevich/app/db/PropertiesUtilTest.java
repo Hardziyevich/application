@@ -1,5 +1,6 @@
 package com.hardziyevich.app.db;
 
+import com.hardziyevich.app.util.PropertiesUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

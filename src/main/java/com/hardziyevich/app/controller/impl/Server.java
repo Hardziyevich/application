@@ -25,7 +25,7 @@ public class Server implements MainServer {
 
     @Override
     public void start() {
-        if(hostname == null) {
+        if (hostname == null) {
             HttpServer server = null;
             try {
                 server = HttpServer.create();

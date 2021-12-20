@@ -40,7 +40,6 @@ final class SqlCommand {
                 UPDATE %s
                 SET
                 """;
-        static final String UPDATE_CASE_NAME = "case_value = (SELECT id FROM electronics.case_size WHERE name = ?)";
         static final String UPDATE_VALUE = "value=?";
         static final String UPDATE_UNIT = "unit_measurement=?";
         static final String UPDATE_VOLTAGE = "voltage_rated=?";
@@ -67,8 +66,6 @@ final class SqlCommand {
         static final String SELECT_UNIT = "e.unit_measurement=?";
         static final String SELECT_VOLTAGE_RATED = "e.voltage_rated=?";
         static final String SELECT_CASE_NAME = "cs.name=?";
-        static final String SELECT_TEMP_LOW = "ot.low_temp=?";
-        static final String SELECT_TEMP_HIGH = "ot.high_temp=?";
         static final String SELECT_AND = " AND ";
         static final String SELECT_SETTING_CAPACITORS = "e.voltage_rated";
 
