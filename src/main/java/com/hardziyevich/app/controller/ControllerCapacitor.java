@@ -1,16 +1,16 @@
 package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.hardziyevich.app.service.dto.CreateCapacitorDto;
+import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.Service;
 import com.hardziyevich.app.service.ServiceCapacitor;
-import com.hardziyevich.app.service.dto.UpdateCapacitorDto;
+import com.hardziyevich.app.service.dto.UpdateDto;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.net.URI;
 import java.util.*;
 
-import static com.hardziyevich.app.controller.AttributesCapacitor.*;
+import static com.hardziyevich.app.controller.Attributes.*;
 
 class ControllerCapacitor extends Controller {
 
@@ -33,7 +33,7 @@ class ControllerCapacitor extends Controller {
     @Override
     boolean create(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
-        CreateCapacitorDto capacitorDto = CreateCapacitorDto.builder()
+        CreateDto capacitorDto = CreateDto.builder()
                 .value(jsonObject.getString(VALUE))
                 .unit(jsonObject.getString(UNIT))
                 .voltage(jsonObject.getString(VOLTAGE))
@@ -48,7 +48,7 @@ class ControllerCapacitor extends Controller {
     @Override
     boolean update(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
-        UpdateCapacitorDto build = UpdateCapacitorDto.builder()
+        UpdateDto build = UpdateDto.builder()
                 .id(jsonObject.getString(ID))
                 .value(jsonObject.getString(VALUE))
                 .unit(jsonObject.getString(UNIT))
@@ -60,13 +60,9 @@ class ControllerCapacitor extends Controller {
     @Override
     List<JsonObject> search(final HttpExchange httpExchange) {
         URI requestURI = httpExchange.getRequestURI();
-        Map<AttributesCapacitor, String> attributes = new HashMap<>();
-        Arrays.stream(AttributesCapacitor.values())
-                .forEach(at -> {
-                    Optional<String> attribute = readAttributes(requestURI, at);
-                    attribute.ifPresent(p -> attributes.put(at, p));
-                });
-
+        Map<Attributes, String> attributes = new HashMap<>();
+        searchAttributeUrl(requestURI, attributes);
         return service.search(attributes);
     }
+
 }

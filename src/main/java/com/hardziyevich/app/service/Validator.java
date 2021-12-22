@@ -1,4 +1,4 @@
-package com.hardziyevich.app.util;
+package com.hardziyevich.app.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class Validator<T> {
+class Validator<T> {
 
     private final T object;
     private final List<String> messages = new ArrayList<>();
@@ -16,11 +16,11 @@ public class Validator<T> {
         this.object = object;
     }
 
-    public static <T> Validator<T> of(T object) {
+    static <T> Validator<T> of(T object) {
         return new Validator<>(Objects.requireNonNull(object));
     }
 
-    public Validator<T> validator(Predicate<T> predicate, String message) {
+    Validator<T> validator(Predicate<T> predicate, String message) {
         if (!predicate.test(object)) {
             messages.add(message);
             log.warn(message);
@@ -28,12 +28,11 @@ public class Validator<T> {
         return this;
     }
 
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return messages.isEmpty();
     }
 
-    public T get() {
+    T get() {
         return object;
     }
-
 }

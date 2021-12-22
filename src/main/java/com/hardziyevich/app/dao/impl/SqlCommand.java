@@ -1,5 +1,8 @@
 package com.hardziyevich.app.dao.impl;
 
+/**
+ * Constant class for Sql request in database.
+ */
 final class SqlCommand {
 
     private SqlCommand() {
@@ -27,6 +30,7 @@ final class SqlCommand {
                         (SELECT id FROM %s WHERE name = ?),
                         (SELECT id FROM %s WHERE high_temp =? AND low_temp =?));""";
         static final String INSERT_SETTING_CAPACITORS = "voltage_rated";
+        static final String INSERT_SETTING_RESISTORS = "power";
 
     }
 
@@ -43,6 +47,7 @@ final class SqlCommand {
         static final String UPDATE_VALUE = "value=?";
         static final String UPDATE_UNIT = "unit_measurement=?";
         static final String UPDATE_VOLTAGE = "voltage_rated=?";
+        static final String UPDATE_POWER = "power=?";
         static final String UPDATE_COMMA = ",";
         static final String UPDATE_WHERE_ID = " WHERE id=?";
 
@@ -65,9 +70,11 @@ final class SqlCommand {
         static final String SELECT_VALUE = "e.value=?";
         static final String SELECT_UNIT = "e.unit_measurement=?";
         static final String SELECT_VOLTAGE_RATED = "e.voltage_rated=?";
+        static final String SELECT_POWER = "e.power=?";
         static final String SELECT_CASE_NAME = "cs.name=?";
         static final String SELECT_AND = " AND ";
         static final String SELECT_SETTING_CAPACITORS = "e.voltage_rated";
+        static final String SELECT_SETTING_RESISTORS = "e.power";
 
     }
 
@@ -78,6 +85,7 @@ final class SqlCommand {
         }
 
         static final String TABLE_CAPACITORS = "electronics.capacitors";
+        static final String TABLE_RESISTORS = "electronics.resistors";
         static final String TABLE_CASE = "electronics.case_size";
         static final String TABLE_TEMPERATURE = "electronics.operating_temperature";
 

@@ -1,28 +1,28 @@
 package com.hardziyevich.app.service;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.hardziyevich.app.controller.AttributesCapacitor;
-import com.hardziyevich.app.dao.CapacitorDao;
+import com.hardziyevich.app.controller.Attributes;
+import com.hardziyevich.app.dao.ElementDao;
 import com.hardziyevich.app.dao.impl.CapacitorDaoImpl;
 import com.hardziyevich.app.dao.impl.CapacitorsSpecificationImpl;
 import com.hardziyevich.app.entity.Capacitors;
-import com.hardziyevich.app.service.dto.CreateCapacitorDto;
-import com.hardziyevich.app.service.dto.UpdateCapacitorDto;
-import com.hardziyevich.app.util.Validator;
+import com.hardziyevich.app.service.dto.CreateDto;
+import com.hardziyevich.app.service.dto.UpdateDto;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 import static com.hardziyevich.app.service.Service.RegularExpression.*;
-import static com.hardziyevich.app.controller.AttributesCapacitor.*;
+import static com.hardziyevich.app.controller.Attributes.*;
 
 public class ServiceCapacitor implements Service {
 
     private static final ServiceCapacitor instance = new ServiceCapacitor();
 
-    private final CapacitorDao capacitorDao = CapacitorDaoImpl.getInstance();
+    private final ElementDao<Capacitors> capacitorDao = new CapacitorDaoImpl.Builder().type(DEFAULT).build();
 
 
     private ServiceCapacitor() {
@@ -39,24 +39,24 @@ public class ServiceCapacitor implements Service {
     }
 
     @Override
-    public boolean create(CreateCapacitorDto capacitorDto) {
+    public boolean create(CreateDto dto) {
         boolean result = false;
-        if (capacitorDto != null) {
-            Validator<CreateCapacitorDto> validator = Validator.of(capacitorDto)
+        if (dto != null) {
+            Validator<CreateDto> validator = Validator.of(dto)
                     .validator(c -> c.getValue().matches(REG_DIGIT), "Capacitor value is not digit.")
                     .validator(c -> c.getUnit().matches(REG_UNIT_CAPACITOR), "Capacitor contains is not correct unit.")
                     .validator(c -> c.getTempLow().matches(REG_TEMP_LOW), "Capacitor temp low contains is not correct value.")
                     .validator(c -> c.getTempHigh().matches(REG_TEMP_HIGH), "Capacitor temp high contains is not correct value.");
-            result = validator.isEmpty() && capacitorDao.create(capacitorDto);
+            result = validator.isEmpty() && capacitorDao.create(dto);
         }
         return result;
     }
 
     @Override
-    public boolean update(UpdateCapacitorDto capacitorDto) {
+    public boolean update(UpdateDto capacitorDto) {
         boolean result = false;
         if (capacitorDto != null) {
-            Validator<UpdateCapacitorDto> validator = Validator.of(capacitorDto)
+            Validator<UpdateDto> validator = Validator.of(capacitorDto)
                     .validator(c -> c.getId().matches(REG_DIGIT), "Capacitor id is not digit.")
                     .validator(c -> c.getValue().matches(REG_DIGIT), "Capacitor value is not digit.")
                     .validator(c -> c.getUnit().matches(REG_UNIT_CAPACITOR), "Capacitor contains is not correct unit.");
@@ -66,11 +66,11 @@ public class ServiceCapacitor implements Service {
     }
 
     @Override
-    public List<JsonObject> search(Map<AttributesCapacitor, String> attributes) {
+    public List<JsonObject> search(Map<Attributes, String> attributes) {
         List<Capacitors> result = new ArrayList<>();
         List<JsonObject> jsonObjects = new ArrayList<>();
         if (attributes != null) {
-            Validator<Map<AttributesCapacitor, String>> validator = Validator.of(attributes);
+            Validator<Map<Attributes, String>> validator = Validator.of(attributes);
             attributes.forEach((k, v) -> {
                 switch (k) {
                     case ID -> {

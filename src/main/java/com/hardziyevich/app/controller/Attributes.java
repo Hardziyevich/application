@@ -2,11 +2,12 @@ package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonKey;
 
-public enum AttributesCapacitor implements JsonKey {
+public enum Attributes implements JsonKey {
 
     ID,
     VALUE,
     UNIT,
+    POWER,
     VOLTAGE,
     CASE,
     TEMP_LOW,
