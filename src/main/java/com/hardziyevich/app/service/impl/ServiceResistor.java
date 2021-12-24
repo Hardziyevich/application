@@ -1,12 +1,11 @@
-package com.hardziyevich.app.service;
+package com.hardziyevich.app.service.impl;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.controller.Attributes;
 import com.hardziyevich.app.dao.ElementDao;
-import com.hardziyevich.app.dao.impl.ResistorDao;
 import com.hardziyevich.app.dao.impl.ResistorsSpecification;
-import com.hardziyevich.app.entity.Capacitors;
 import com.hardziyevich.app.entity.Resistors;
+import com.hardziyevich.app.service.Service;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
 
@@ -15,21 +14,24 @@ import java.util.List;
 import java.util.Map;
 
 import static com.hardziyevich.app.controller.Attributes.*;
-import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 import static com.hardziyevich.app.service.Service.RegularExpression.*;
 import static com.hardziyevich.app.service.Service.RegularExpression.REG_TEMP_HIGH;
 
+/**
+ * {@inheritDoc}
+ */
 public class ServiceResistor implements Service {
 
     private static ServiceResistor instance;
     private final ElementDao<Resistors> resistorDao;
 
-//    private final ElementDao<Resistors> resistorDao = new ResistorDao.Builder().type(DEFAULT).build();
-
     private ServiceResistor(ElementDao<Resistors> resistorDao) {
         this.resistorDao = resistorDao;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean deleteById(String id) {
         boolean result = false;
@@ -40,6 +42,9 @@ public class ServiceResistor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean create(CreateDto dto) {
         boolean result = false;
@@ -54,6 +59,9 @@ public class ServiceResistor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(UpdateDto capacitorDto) {
         boolean result = false;
@@ -67,6 +75,9 @@ public class ServiceResistor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<JsonObject> search(Map<Attributes, String> attributes) {
         List<Resistors> result = new ArrayList<>();

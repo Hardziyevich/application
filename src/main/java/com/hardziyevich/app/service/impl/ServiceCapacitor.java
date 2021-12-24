@@ -1,4 +1,4 @@
-package com.hardziyevich.app.service;
+package com.hardziyevich.app.service.impl;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.controller.Attributes;
@@ -6,6 +6,7 @@ import com.hardziyevich.app.dao.ElementDao;
 import com.hardziyevich.app.dao.impl.CapacitorDao;
 import com.hardziyevich.app.dao.impl.CapacitorsSpecification;
 import com.hardziyevich.app.entity.Capacitors;
+import com.hardziyevich.app.service.Service;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
 
@@ -18,16 +19,21 @@ import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 import static com.hardziyevich.app.service.Service.RegularExpression.*;
 import static com.hardziyevich.app.controller.Attributes.*;
 
+/**
+ * {@inheritDoc}
+ */
 public class ServiceCapacitor implements Service {
 
     private static final ServiceCapacitor instance = new ServiceCapacitor();
-
     private final ElementDao<Capacitors> capacitorDao = new CapacitorDao.Builder().type(DEFAULT).build();
 
 
     private ServiceCapacitor() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean deleteById(String id) {
         boolean result = false;
@@ -38,6 +44,9 @@ public class ServiceCapacitor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean create(CreateDto dto) {
         boolean result = false;
@@ -52,6 +61,9 @@ public class ServiceCapacitor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean update(UpdateDto capacitorDto) {
         boolean result = false;
@@ -65,6 +77,9 @@ public class ServiceCapacitor implements Service {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<JsonObject> search(Map<Attributes, String> attributes) {
         List<Capacitors> result = new ArrayList<>();

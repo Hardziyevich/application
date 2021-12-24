@@ -3,7 +3,7 @@ package com.hardziyevich.app.controller;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.Service;
-import com.hardziyevich.app.service.ServiceCapacitor;
+import com.hardziyevich.app.service.impl.ServiceCapacitor;
 import com.hardziyevich.app.service.dto.UpdateDto;
 import com.sun.net.httpserver.HttpExchange;
 

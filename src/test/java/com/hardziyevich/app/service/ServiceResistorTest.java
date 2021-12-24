@@ -1,7 +1,5 @@
 package com.hardziyevich.app.service;
 
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.hardziyevich.app.controller.Attributes;
 import com.hardziyevich.app.dao.ElementDao;
 import com.hardziyevich.app.dao.JdbcSpecification;
 import com.hardziyevich.app.dao.impl.ResistorDao;
@@ -9,17 +7,11 @@ import com.hardziyevich.app.dao.impl.ResistorsSpecification;
 import com.hardziyevich.app.entity.Resistors;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
+import com.hardziyevich.app.service.impl.ServiceResistor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static com.hardziyevich.app.controller.Attributes.*;
-import static com.hardziyevich.app.controller.Attributes.ID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiceResistorTest {
