@@ -1,6 +1,7 @@
 package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
+import com.hardziyevich.app.dao.impl.ResistorDao;
 import com.hardziyevich.app.service.Service;
 import com.hardziyevich.app.service.ServiceResistor;
 import com.hardziyevich.app.service.dto.CreateDto;
@@ -11,10 +12,11 @@ import java.net.URI;
 import java.util.*;
 
 import static com.hardziyevich.app.controller.Attributes.*;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 
 public class ControllerResistor extends Controller {
 
-    private final Service service = ServiceResistor.getInstance();
+    private static final Service service = ServiceResistor.getInstance(new ResistorDao.Builder().type(DEFAULT).build());
 
     @Override
     boolean delete(HttpExchange httpExchange) {

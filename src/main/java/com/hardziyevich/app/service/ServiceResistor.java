@@ -3,8 +3,9 @@ package com.hardziyevich.app.service;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.controller.Attributes;
 import com.hardziyevich.app.dao.ElementDao;
-import com.hardziyevich.app.dao.impl.ResistorDaoImpl;
-import com.hardziyevich.app.dao.impl.ResistorsSpecificationImpl;
+import com.hardziyevich.app.dao.impl.ResistorDao;
+import com.hardziyevich.app.dao.impl.ResistorsSpecification;
+import com.hardziyevich.app.entity.Capacitors;
 import com.hardziyevich.app.entity.Resistors;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
@@ -20,11 +21,13 @@ import static com.hardziyevich.app.service.Service.RegularExpression.REG_TEMP_HI
 
 public class ServiceResistor implements Service {
 
-    private static final ServiceResistor instance = new ServiceResistor();
+    private static ServiceResistor instance;
+    private final ElementDao<Resistors> resistorDao;
 
-    private final ElementDao<Resistors> resistorDao = new ResistorDaoImpl.Builder().type(DEFAULT).build();
+//    private final ElementDao<Resistors> resistorDao = new ResistorDao.Builder().type(DEFAULT).build();
 
-    private ServiceResistor() {
+    private ServiceResistor(ElementDao<Resistors> resistorDao) {
+        this.resistorDao = resistorDao;
     }
 
     @Override
@@ -79,11 +82,11 @@ public class ServiceResistor implements Service {
                         validator.validator(var -> var.get(VALUE).matches(REG_DIGIT), "Resistor value is not digit.");
                     }
                     case UNIT -> {
-                        validator.validator(var -> var.get(UNIT).matches(REG_UNIT_CAPACITOR), "Resistor contains is not correct unit.");
+                        validator.validator(var -> var.get(UNIT).matches(REG_UNIT_RESISTOR), "Resistor contains is not correct unit.");
                     }
                 }
             });
-            result = validator.isEmpty() ? resistorDao.search(new ResistorsSpecificationImpl(attributes)) : result;
+            result = validator.isEmpty() ? resistorDao.search(new ResistorsSpecification(attributes)) : result;
         }
         for (Resistors search : result) {
             JsonObject json = new JsonObject();
@@ -99,7 +102,10 @@ public class ServiceResistor implements Service {
         return jsonObjects;
     }
 
-    public static Service getInstance() {
+    public static Service getInstance(ElementDao<Resistors> resistorDao) {
+        if(instance == null){
+            instance = new ServiceResistor(resistorDao);
+        }
         return instance;
     }
 

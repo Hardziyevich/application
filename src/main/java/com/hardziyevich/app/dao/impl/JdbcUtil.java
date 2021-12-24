@@ -10,6 +10,9 @@ import java.util.Queue;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Select.*;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Select.SELECT_AND;
 
+/**
+ * Util class provides methods for create request to database
+ */
 class JdbcUtil {
 
     static void setStatement(PreparedStatement preparedStatement, Object[] seq) throws SQLException {

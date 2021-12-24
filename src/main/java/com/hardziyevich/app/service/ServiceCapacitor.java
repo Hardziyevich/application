@@ -3,8 +3,8 @@ package com.hardziyevich.app.service;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.controller.Attributes;
 import com.hardziyevich.app.dao.ElementDao;
-import com.hardziyevich.app.dao.impl.CapacitorDaoImpl;
-import com.hardziyevich.app.dao.impl.CapacitorsSpecificationImpl;
+import com.hardziyevich.app.dao.impl.CapacitorDao;
+import com.hardziyevich.app.dao.impl.CapacitorsSpecification;
 import com.hardziyevich.app.entity.Capacitors;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
@@ -22,7 +22,7 @@ public class ServiceCapacitor implements Service {
 
     private static final ServiceCapacitor instance = new ServiceCapacitor();
 
-    private final ElementDao<Capacitors> capacitorDao = new CapacitorDaoImpl.Builder().type(DEFAULT).build();
+    private final ElementDao<Capacitors> capacitorDao = new CapacitorDao.Builder().type(DEFAULT).build();
 
 
     private ServiceCapacitor() {
@@ -84,7 +84,7 @@ public class ServiceCapacitor implements Service {
                     }
                 }
             });
-            result = validator.isEmpty() ? capacitorDao.search(new CapacitorsSpecificationImpl(attributes)) : result;
+            result = validator.isEmpty() ? capacitorDao.search(new CapacitorsSpecification(attributes)) : result;
         }
         for (Capacitors search : result) {
             JsonObject json = new JsonObject();

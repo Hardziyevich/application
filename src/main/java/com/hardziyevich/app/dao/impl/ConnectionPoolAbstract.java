@@ -2,6 +2,9 @@ package com.hardziyevich.app.dao.impl;
 
 import java.util.Map;
 
+/**
+ * Provides design pattern abstract method for create connection poll
+ */
 public class ConnectionPoolAbstract {
 
     private ConnectionPoolAbstract() {

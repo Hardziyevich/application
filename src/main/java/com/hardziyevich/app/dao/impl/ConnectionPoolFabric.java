@@ -4,7 +4,9 @@ import java.util.Map;
 
 import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.*;
 
-
+/**
+ * Provides design pattern fabric method for create different connection to database depends on setting
+ */
 public class ConnectionPoolFabric {
 
     private ConnectionPoolFabric() {
@@ -20,7 +22,7 @@ public class ConnectionPoolFabric {
 
     }
 
-    public static ConnectionPool defaultConnection(){
+    public static ConnectionPool defaultConnection() {
         return ConnectionPool.INSTANCE
                 .urlKey(PropertiesUtil.get(URL_KEY))
                 .passwordKey(PropertiesUtil.get(PASSWORD_KEY))
@@ -28,7 +30,7 @@ public class ConnectionPoolFabric {
                 .poolSize(PropertiesUtil.get(POOL_SIZE)).build();
     }
 
-    public static ConnectionPool flexibleConnection(Map<String,String> properties) {
+    public static ConnectionPool flexibleConnection(Map<String, String> properties) {
         return ConnectionPool.INSTANCE
                 .urlKey(properties.get(URL_KEY))
                 .passwordKey(properties.get(PASSWORD_KEY))
