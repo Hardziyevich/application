@@ -16,10 +16,8 @@ import java.util.*;
 public class ResistorsSpecification implements JdbcSpecification<Resistors> {
 
     private final Map<Attributes, String> attributes;
-    private String sql;
 
-
-    public ResistorsSpecification(Map<Attributes, String> attributes) {
+    public ResistorsSpecification(final Map<Attributes, String> attributes) {
         this.attributes = attributes;
     }
 
@@ -27,7 +25,7 @@ public class ResistorsSpecification implements JdbcSpecification<Resistors> {
      * {@inheritDoc}
      */
     @Override
-    public List<Resistors> searchFilter(Connection connection) throws SQLException {
+    public List<Resistors> searchFilter(Connection connection, String sql) throws SQLException {
         List<Resistors> resistors = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder(sql);
         Queue<Object> queue = new ArrayDeque<>();
@@ -44,11 +42,5 @@ public class ResistorsSpecification implements JdbcSpecification<Resistors> {
         }
         return resistors;
     }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSql(String sql) {
-        this.sql = sql;
-    }
+
 }

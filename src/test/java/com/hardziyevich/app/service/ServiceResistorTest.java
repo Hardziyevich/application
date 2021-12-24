@@ -1,5 +1,7 @@
 package com.hardziyevich.app.service;
 
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.hardziyevich.app.controller.Attributes;
 import com.hardziyevich.app.dao.ElementDao;
 import com.hardziyevich.app.dao.JdbcSpecification;
 import com.hardziyevich.app.dao.impl.ResistorDao;
@@ -12,12 +14,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.hardziyevich.app.controller.Attributes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiceResistorTest {
 
     private static final ElementDao<Resistors> elementDao = Mockito.mock(ResistorDao.class);
-    private static final Service service = ServiceResistor.getInstance(elementDao);
+    private static final Service service = new ServiceResistor(elementDao);
     private static final JdbcSpecification<Resistors> spec = Mockito.mock(ResistorsSpecification.class);
 
     @Test
@@ -45,24 +53,42 @@ public class ServiceResistorTest {
                 .unit("Ohm")
                 .tempLow("-55°C")
                 .tempHigh("+55°C")
+                .power("0.1W")
                 .build();
         CreateDto unit = CreateDto.builder()
                 .value("10")
                 .unit("not unit")
                 .tempLow("-55°C")
                 .tempHigh("+55°C")
+                .power("0.1W")
                 .build();
         CreateDto tempLow = CreateDto.builder()
                 .value("10")
                 .unit("Ohm")
                 .tempLow("not temp")
                 .tempHigh("+55°C")
+                .power("0.1W")
                 .build();
         CreateDto tempHigh = CreateDto.builder()
-                .value("not digit")
+                .value("10")
                 .unit("Ohm")
                 .tempLow("-55°C")
                 .tempHigh("not temp")
+                .power("0.1W")
+                .build();
+        CreateDto power = CreateDto.builder()
+                .value("123")
+                .unit("Ohm")
+                .tempLow("-55°C")
+                .power("wrong")
+                .tempHigh("+55°C")
+                .build();
+
+        CreateDto nullPower = CreateDto.builder()
+                .value("123")
+                .unit("Ohm")
+                .tempLow("-55°C")
+                .tempHigh("+55°C")
                 .build();
 
         assertAll(() -> {
@@ -71,6 +97,8 @@ public class ServiceResistorTest {
             assertFalse(service.create(tempHigh));
             assertFalse(service.create(tempLow));
             assertFalse(service.create(null));
+            assertFalse(service.create(power));
+            assertFalse(service.create(nullPower));
         });
     }
 
@@ -109,11 +137,18 @@ public class ServiceResistorTest {
                 .unit("wrong")
                 .power("0.1W")
                 .build();
+        UpdateDto power = UpdateDto.builder()
+                .id("1")
+                .value("10")
+                .unit("wrong")
+                .power("0.1W")
+                .build();
         assertAll(() -> {
             assertFalse(service.update(id));
             assertFalse(service.update(value));
             assertFalse(service.update(unit));
             assertFalse(service.update(null));
+            assertFalse(service.update(power));
         });
     }
 
@@ -126,27 +161,116 @@ public class ServiceResistorTest {
                 .unit("Ohm")
                 .power("0.1W")
                 .build();
-
         Mockito.doReturn(true).when(elementDao).update(test);
         assertTrue(service.update(test));
     }
-/*
+
     @Test
     @DisplayName("Search resistor by correct result")
     void searchCorrect() {
         Map<Attributes,String> test = new HashMap<>();
-        List<JsonObject> resultMock = new ArrayList<>();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.put(ID,"test");
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
         test.put(ID,"10");
         test.put(VALUE,"10");
         test.put(UNIT,"kOhm");
-        resultMock.add(jsonObject);
-        Mockito.doReturn(resultMock).when(elementDao).search(spec);
-        System.out.println(service.search(test));
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
     }
-*/
 
-//    @Test
-//    @DisplayName("Resistor search ")
+    @Test
+    @DisplayName("Search resistor by wrong id ")
+    void searchWrongId() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(ID,"test");
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by wrong value")
+    void searchWrongValue() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(VALUE,"test");
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by wrong unit")
+    void searchWrongUnit() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(UNIT,"test");
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by wrong power")
+    void searchWrongPower() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(POWER,"test");
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+    @Test
+    @DisplayName("Search resistor by null")
+    void searchNull() {
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(null));
+    }
+
+    @Test
+    @DisplayName("Search resistor by null power")
+    void searchAttributeNullPower() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(POWER,null);
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by null id")
+    void searchAttributeNullId() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(ID,null);
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by null value")
+    void searchAttributeNullValue() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(VALUE,null);
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
+
+    @Test
+    @DisplayName("Search resistor by null unit")
+    void searchAttributeNullUnit() {
+        Map<Attributes,String> test = new HashMap<>();
+        List<JsonObject> result = new ArrayList<>();
+        List<Resistors> resistors = new ArrayList<>();
+        test.put(UNIT,null);
+        Mockito.doReturn(resistors).when(elementDao).search(spec);
+        assertEquals(result,service.search(test));
+    }
 }

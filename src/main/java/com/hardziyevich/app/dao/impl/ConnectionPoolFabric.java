@@ -27,7 +27,8 @@ public class ConnectionPoolFabric {
                 .urlKey(PropertiesUtil.get(URL_KEY))
                 .passwordKey(PropertiesUtil.get(PASSWORD_KEY))
                 .usernameKey(PropertiesUtil.get(USERNAME_KEY))
-                .poolSize(PropertiesUtil.get(POOL_SIZE)).build();
+                .poolSize(PropertiesUtil.get(POOL_SIZE))
+                .build();
     }
 
     public static ConnectionPool flexibleConnection(Map<String, String> properties) {
@@ -35,6 +36,8 @@ public class ConnectionPoolFabric {
                 .urlKey(properties.get(URL_KEY))
                 .passwordKey(properties.get(PASSWORD_KEY))
                 .usernameKey(properties.get(USERNAME_KEY))
-                .poolSize(properties.get(POOL_SIZE)).build();
+                .poolSize(properties.get(POOL_SIZE))
+                .build();
     }
+
 }

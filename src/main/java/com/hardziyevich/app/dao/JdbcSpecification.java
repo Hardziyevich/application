@@ -12,15 +12,9 @@ public interface JdbcSpecification<T> {
 
     /**
      * Create sql request in database for search elements.
-     * @param connection
-     * @return
-     * @throws SQLException
+     * @param connection connection to data base
+     * @return a list of element
+     * @throws SQLException a sql exception
      */
-    List<T> searchFilter(Connection connection) throws SQLException;
-
-    /**
-     * Concat sql request
-     * @param sql
-     */
-    void setSql(String sql);
+    List<T> searchFilter(Connection connection, String sql) throws SQLException;
 }

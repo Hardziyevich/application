@@ -28,7 +28,7 @@ public class ResistorDao implements ElementDao<Resistors> {
 
     private static ConnectionPool connectionPool;
 
-    private ResistorDao(Builder builder) {
+    private ResistorDao(final Builder builder) {
         if (connectionPool == null) {
             connectionPool = ConnectionPoolAbstract.connectionPool(builder.type, builder.properties);
         }
@@ -110,9 +110,8 @@ public class ResistorDao implements ElementDao<Resistors> {
     public List<Resistors> search(JdbcSpecification<Resistors> jdbcSpecification) {
         String sql = SELECT.formatted(SELECT_SETTING_RESISTORS, TABLE_RESISTORS);
         List<Resistors> resistors = new ArrayList<>();
-        jdbcSpecification.setSql(sql);
         try (Connection connection = connectionPool.openConnection()) {
-            resistors.addAll(jdbcSpecification.searchFilter(connection));
+            resistors.addAll(jdbcSpecification.searchFilter(connection, sql));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -129,7 +128,8 @@ public class ResistorDao implements ElementDao<Resistors> {
 
         /**
          * Provides method that set properties for ResistorDao
-         * @param key that key need to use from PropertiesFile
+         *
+         * @param key   that key need to use from PropertiesFile
          * @param value a string value
          * @return itself
          */
@@ -140,6 +140,7 @@ public class ResistorDao implements ElementDao<Resistors> {
 
         /**
          * Provides method that set properties for ResistorDao
+         *
          * @param properties a set of the properties
          * @return itself
          */
@@ -150,6 +151,7 @@ public class ResistorDao implements ElementDao<Resistors> {
 
         /**
          * Provides method that set type for loading ResistorDao
+         *
          * @param type a type of ConnectionPoolAbstract.Type
          * @return itself
          */
@@ -160,6 +162,7 @@ public class ResistorDao implements ElementDao<Resistors> {
 
         /**
          * Create ElementDao<Resistors>
+         *
          * @return a elementdao interface
          */
         public ElementDao<Resistors> build() {

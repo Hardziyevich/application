@@ -14,9 +14,10 @@ import static com.hardziyevich.app.controller.Attributes.*;
 
 class ControllerCapacitor extends Controller {
 
-    private final Service service = ServiceCapacitor.getInstance();
+    private final Service service;
 
-    public ControllerCapacitor() {
+    public ControllerCapacitor(final Service service) {
+        this.service = service;
     }
 
     @Override

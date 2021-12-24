@@ -1,23 +1,22 @@
 package com.hardziyevich.app;
 
-
+import com.hardziyevich.app.controller.ControllerFactory;
 import com.hardziyevich.app.controller.Handler;
-import com.sun.net.httpserver.HttpServer;
+import com.hardziyevich.app.controller.Server;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Hello world!
- *
- */
+import static com.hardziyevich.app.controller.ConstantHttp.UrlPath.CAPACITOR_PATH;
+import static com.hardziyevich.app.controller.ConstantHttp.UrlPath.RESISTOR_PATH;
+
 public class App 
 {
-    public static void main( String[] args ) throws IOException {
-        HttpServer server = HttpServer.create();
-        server.bind(new InetSocketAddress(8081), 0);
-        server.createContext("/capacitor", new Handler()::handle);
-        server.createContext("/resistor", new Handler()::handle);
+    public static void main( String[] args ){
+        Map<String,Handler> handlers = new HashMap<>();
+        handlers.put(CAPACITOR_PATH,new Handler(ControllerFactory.newCapacitorController()));
+        handlers.put(RESISTOR_PATH,new Handler(ControllerFactory.newResistorController()));
+        Server server = new Server(handlers);
         server.start();
     }
 }

@@ -1,20 +1,14 @@
 package com.hardziyevich.app.dao;
 
 import com.hardziyevich.app.controller.Attributes;
-import com.hardziyevich.app.dao.impl.CapacitorDao;
-import com.hardziyevich.app.dao.impl.CapacitorsSpecification;
 import com.hardziyevich.app.dao.impl.ResistorDao;
 import com.hardziyevich.app.dao.impl.ResistorsSpecification;
-import com.hardziyevich.app.entity.Capacitors;
 import com.hardziyevich.app.entity.CaseSize;
 import com.hardziyevich.app.entity.OperatingTemperature;
 import com.hardziyevich.app.entity.Resistors;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -22,8 +16,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hardziyevich.app.dao.TestContainer.attributes;
 import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.FLEXIBLE;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.*;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.POOL_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Testcontainers
@@ -31,13 +26,24 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ResistorDaoTest {
 
     @Container
-    public static PostgreSQLContainer<TestContainer> postgreSQLContainer = TestContainer.getContainer();
-    public static ElementDao<Resistors> resistors;
+    private static final PostgreSQLContainer<TestContainer> postgreSQLContainer = TestContainer.getContainer();
+    private static ElementDao<Resistors> resistors;
 
     @BeforeAll
     @DisplayName("Create db")
     void load() {
+        postgreSQLContainer.start();
+        Map<String, String> attributes = new HashMap<>();
+        attributes.put(PASSWORD_KEY, postgreSQLContainer.getPassword());
+        attributes.put(USERNAME_KEY, postgreSQLContainer.getUsername());
+        attributes.put(URL_KEY, postgreSQLContainer.getJdbcUrl());
+        attributes.put(POOL_SIZE, "5");
         resistors = new ResistorDao.Builder().type(FLEXIBLE).property(attributes).build();
+    }
+
+    @AfterAll
+    void stop() {
+        postgreSQLContainer.stop();
     }
 
 

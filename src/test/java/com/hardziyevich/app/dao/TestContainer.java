@@ -15,10 +15,10 @@ import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.FLEXIBLE
 import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.*;
 import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.POOL_SIZE;
 
-class TestContainer extends PostgreSQLContainer<TestContainer>{
+public class TestContainer extends PostgreSQLContainer<TestContainer>{
 
     private static final TestContainer container = new TestContainer();
-    public static Map<String, String> attributes = new HashMap<>();
+    private static final Map<String, String> attributes = new HashMap<>();
     private static ConnectionPool connectionPool;
 
     private TestContainer(){

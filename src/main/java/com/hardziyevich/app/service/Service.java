@@ -50,6 +50,8 @@ public interface Service {
         public static final String REG_DIGIT = "\\d+";
         public static final String REG_UNIT_CAPACITOR = "pF|uF";
         public static final String REG_UNIT_RESISTOR = "Ohm|kOhm";
+        public static final String REG_VOLTAGE = "\\d+\\.?\\d+V";
+        public static final String REG_POWER = "\\d+\\.?\\d+W";
         public static final String REG_TEMP_LOW = "-\\d+\\u00B0C";
         public static final String REG_TEMP_HIGH = "\\+\\d+\\u00B0C";
     }

@@ -16,7 +16,11 @@ import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 
 public class ControllerResistor extends Controller {
 
-    private static final Service service = ServiceResistor.getInstance(new ResistorDao.Builder().type(DEFAULT).build());
+    private final Service service;
+
+    public ControllerResistor(final Service service) {
+        this.service = service;
+    }
 
     @Override
     boolean delete(HttpExchange httpExchange) {
@@ -62,4 +66,5 @@ public class ControllerResistor extends Controller {
                 .build();
         return service.update(build);
     }
+
 }

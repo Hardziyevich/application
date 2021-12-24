@@ -17,8 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.hardziyevich.app.dao.TestContainer.attributes;
 import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.FLEXIBLE;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.*;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.POOL_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Testcontainers
@@ -26,13 +27,24 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CapacitorDaoTest {
 
     @Container
-    public static PostgreSQLContainer<TestContainer> postgreSQLContainer = TestContainer.getContainer();
-    public static ElementDao<Capacitors> capacitors;
+    private static final PostgreSQLContainer<TestContainer> postgreSQLContainer = TestContainer.getContainer();
+    private static ElementDao<Capacitors> capacitors;
 
     @BeforeAll
     @DisplayName("Create db")
-    void load() {
+    void start() {
+        postgreSQLContainer.start();
+        Map<String, String> attributes = new HashMap<>();
+        attributes.put(PASSWORD_KEY, postgreSQLContainer.getPassword());
+        attributes.put(USERNAME_KEY, postgreSQLContainer.getUsername());
+        attributes.put(URL_KEY, postgreSQLContainer.getJdbcUrl());
+        attributes.put(POOL_SIZE, "5");
         capacitors = new CapacitorDao.Builder().type(FLEXIBLE).property(attributes).build();
+    }
+
+    @AfterAll
+    void stop() {
+        postgreSQLContainer.stop();
     }
 
     @Test

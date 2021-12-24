@@ -16,9 +16,8 @@ import java.util.*;
 public class CapacitorsSpecification implements JdbcSpecification<Capacitors> {
 
     private final Map<Attributes, String> attributes;
-    private String sql;
 
-    public CapacitorsSpecification(Map<Attributes, String> attributes) {
+    public CapacitorsSpecification(final Map<Attributes, String> attributes) {
         this.attributes = attributes;
     }
 
@@ -26,7 +25,7 @@ public class CapacitorsSpecification implements JdbcSpecification<Capacitors> {
      * {@inheritDoc}
      */
     @Override
-    public List<Capacitors> searchFilter(Connection connection) throws SQLException {
+    public List<Capacitors> searchFilter(Connection connection, String sql) throws SQLException {
         List<Capacitors> capacitors = new ArrayList<>();
         StringBuilder sqlBuilder = new StringBuilder(sql);
         Queue<Object> queue = new ArrayDeque<>();
@@ -44,11 +43,4 @@ public class CapacitorsSpecification implements JdbcSpecification<Capacitors> {
         return capacitors;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSql(String sql) {
-        this.sql = sql;
-    }
 }

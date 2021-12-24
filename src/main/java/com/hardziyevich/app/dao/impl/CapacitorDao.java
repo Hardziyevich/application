@@ -23,7 +23,7 @@ public class CapacitorDao implements ElementDao<Capacitors> {
 
     private static ConnectionPool connectionPool;
 
-    private CapacitorDao(Builder builder) {
+    private CapacitorDao(final Builder builder) {
         if (connectionPool == null) {
             connectionPool = ConnectionPoolAbstract.connectionPool(builder.type, builder.properties);
         }
@@ -106,10 +106,9 @@ public class CapacitorDao implements ElementDao<Capacitors> {
     @Override
     public List<Capacitors> search(JdbcSpecification<Capacitors> jdbcSpecification) {
         String sql = SELECT.formatted(SELECT_SETTING_CAPACITORS, TABLE_CAPACITORS);
-        jdbcSpecification.setSql(sql);
         List<Capacitors> capacitors = new ArrayList<>();
         try (Connection connection = connectionPool.openConnection()) {
-            capacitors.addAll(jdbcSpecification.searchFilter(connection));
+            capacitors.addAll(jdbcSpecification.searchFilter(connection,sql));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

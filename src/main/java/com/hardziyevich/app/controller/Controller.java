@@ -21,7 +21,7 @@ import static com.hardziyevich.app.controller.ConstantHttp.HttpMethod.*;
 import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.*;
 
 
-abstract class Controller {
+public abstract class Controller {
 
     private static final Logger log = LoggerFactory.getLogger(Handler.class);
 
@@ -129,4 +129,5 @@ abstract class Controller {
             responseBody.flush();
         }
     }
+
 }
