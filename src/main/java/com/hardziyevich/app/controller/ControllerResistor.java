@@ -1,9 +1,7 @@
 package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.hardziyevich.app.dao.impl.ResistorDao;
 import com.hardziyevich.app.service.Service;
-import com.hardziyevich.app.service.impl.ServiceResistor;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
 import com.sun.net.httpserver.HttpExchange;
@@ -12,8 +10,10 @@ import java.net.URI;
 import java.util.*;
 
 import static com.hardziyevich.app.controller.Attributes.*;
-import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 
+/**
+ * {@inheritDoc}
+ */
 public class ControllerResistor extends Controller {
 
     private final Service service;
@@ -22,6 +22,9 @@ public class ControllerResistor extends Controller {
         this.service = service;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean delete(HttpExchange httpExchange) {
         URI uri = httpExchange.getRequestURI();
@@ -33,6 +36,9 @@ public class ControllerResistor extends Controller {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     List<JsonObject> search(HttpExchange httpExchange) {
         URI requestURI = httpExchange.getRequestURI();
@@ -41,6 +47,9 @@ public class ControllerResistor extends Controller {
         return service.search(attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean create(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
@@ -55,6 +64,9 @@ public class ControllerResistor extends Controller {
         return service.create(dto);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean update(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);

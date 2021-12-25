@@ -2,6 +2,9 @@ package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonKey;
 
+/**
+ * Provides attributes for processing http response and request.
+ */
 public enum Attributes implements JsonKey {
 
     ID,

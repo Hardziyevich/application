@@ -1,5 +1,8 @@
 package com.hardziyevich.app.controller;
 
+/**
+ * Provides constant for http
+ */
 public final class ConstantHttp {
 
     private ConstantHttp() {

@@ -8,10 +8,18 @@ import java.io.IOException;
 
 import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.STATUS_NOT_FOUND;
 
+/**
+ * Provides main handler for all http request and response.
+ */
 public record Handler(Controller controller) {
 
     private static final Logger log = LoggerFactory.getLogger(Handler.class);
 
+    /**
+     * The main method process httpExchange.
+     *
+     * @param httpExchange a http exchange.
+     */
     public void handle(final HttpExchange httpExchange) {
         try {
             controller.execute(httpExchange);

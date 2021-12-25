@@ -20,7 +20,9 @@ import java.util.Optional;
 import static com.hardziyevich.app.controller.ConstantHttp.HttpMethod.*;
 import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.*;
 
-
+/**
+ * Provides methods CRUD and support methods for processing http request and response.
+ */
 public abstract class Controller {
 
     private static final Logger log = LoggerFactory.getLogger(Handler.class);
@@ -30,14 +32,44 @@ public abstract class Controller {
     static final String REG_ATTRIBUTES_DELIMITER = "&";
     static final String REG_ATTRIBUTE_DELIMITER = "=";
 
+    /**
+     * Processing a http request for delete element in database.
+     *
+     * @param httpExchange a http exchange.
+     * @return a boolean result.
+     */
     abstract boolean delete(final HttpExchange httpExchange);
 
+    /**
+     * Processing a http request for search element in database.
+     *
+     * @param httpExchange a http exchange.
+     * @return a list of json objects.
+     */
     abstract List<JsonObject> search(final HttpExchange httpExchange);
 
+    /**
+     * Processing a http request for create element in database.
+     *
+     * @param httpExchange a http exchange.
+     * @return a boolean result.
+     */
     abstract boolean create(final HttpExchange httpExchange);
 
+    /**
+     * Processing a http request for update element in database.
+     *
+     * @param httpExchange a http exchange.
+     * @return a boolean result.
+     */
     abstract boolean update(final HttpExchange httpExchange);
 
+    /**
+     * The main method that processing request method and delivering particular request in right method.
+     *
+     * @param httpExchange a http exchange.
+     * @throws IOException when a controller encounters a problem.
+     */
     public void execute(final HttpExchange httpExchange) throws IOException {
         String requestMethod = httpExchange.getRequestMethod();
         String requestType = httpExchange.getRequestURI().getPath();
@@ -67,6 +99,13 @@ public abstract class Controller {
         }
     }
 
+    /**
+     * The method reads attributes from url and parsing their.
+     *
+     * @param uri a url.
+     * @param key a particular json attribute from attributes.
+     * @return optional string attribute.
+     */
     protected Optional<String> readAttributes(final URI uri, JsonKey key) {
         final String path = uri.getQuery();
         return path != null ? Arrays.stream(path.split(REG_ATTRIBUTES_DELIMITER))
@@ -75,6 +114,12 @@ public abstract class Controller {
                 .findFirst() : Optional.empty();
     }
 
+    /**
+     * The method reads request from httpExchange and creates JsonObject.
+     *
+     * @param httpExchange a http exchange.
+     * @return a json object.
+     */
     protected JsonObject readRequestFromJson(final HttpExchange httpExchange) {
         JsonObject deserialize = null;
         try (InputStream requestBody = httpExchange.getRequestBody();
@@ -89,25 +134,12 @@ public abstract class Controller {
         return deserialize;
     }
 
-    protected void notSupportRequest(final HttpExchange httpExchange, final String value, final String message) {
-        try {
-            httpExchange.sendResponseHeaders(STATUS_NOT_FOUND, 0);
-            log.info(message, value);
-        } catch (IOException e) {
-            log.warn("Exception while setting response headers {}", e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    protected void response(final HttpExchange httpExchange, final int status, final int responseLength) {
-        try {
-            httpExchange.sendResponseHeaders(status, responseLength);
-        } catch (IOException e) {
-            log.warn("Exception while setting response headers {}", e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * The method search attributes from url.
+     *
+     * @param requestURI a url.
+     * @param attributes a container for attributes.
+     */
     protected void searchAttributeUrl(URI requestURI, Map<Attributes, String> attributes) {
         Arrays.stream(Attributes.values())
                 .forEach(at -> {
@@ -116,7 +148,16 @@ public abstract class Controller {
                 });
     }
 
-    void writeResponse(final HttpExchange httpExchange, List<JsonObject> jsonObjects) throws IOException {
+    private void response(final HttpExchange httpExchange, final int status, final int responseLength) {
+        try {
+            httpExchange.sendResponseHeaders(status, responseLength);
+        } catch (IOException e) {
+            log.warn("Exception while setting response headers {}", e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void writeResponse(final HttpExchange httpExchange, List<JsonObject> jsonObjects) throws IOException {
         Headers responseHeaders = httpExchange.getResponseHeaders();
         StringBuilder db = new StringBuilder();
         for (JsonObject jsonObject : jsonObjects) {
@@ -127,6 +168,16 @@ public abstract class Controller {
         try (OutputStream responseBody = httpExchange.getResponseBody()) {
             responseBody.write(db.toString().getBytes(StandardCharsets.UTF_8));
             responseBody.flush();
+        }
+    }
+
+    private void notSupportRequest(final HttpExchange httpExchange, final String value, final String message) {
+        try {
+            httpExchange.sendResponseHeaders(STATUS_NOT_FOUND, 0);
+            log.info(message, value);
+        } catch (IOException e) {
+            log.warn("Exception while setting response headers {}", e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

@@ -3,7 +3,6 @@ package com.hardziyevich.app.controller;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.Service;
-import com.hardziyevich.app.service.impl.ServiceCapacitor;
 import com.hardziyevich.app.service.dto.UpdateDto;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -12,6 +11,9 @@ import java.util.*;
 
 import static com.hardziyevich.app.controller.Attributes.*;
 
+/**
+ * {@inheritDoc}
+ */
 class ControllerCapacitor extends Controller {
 
     private final Service service;
@@ -20,6 +22,9 @@ class ControllerCapacitor extends Controller {
         this.service = service;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean delete(final HttpExchange httpExchange) {
         URI uri = httpExchange.getRequestURI();
@@ -31,6 +36,9 @@ class ControllerCapacitor extends Controller {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean create(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
@@ -46,6 +54,9 @@ class ControllerCapacitor extends Controller {
         return service.create(capacitorDto);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     boolean update(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
@@ -58,6 +69,9 @@ class ControllerCapacitor extends Controller {
         return service.update(build);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     List<JsonObject> search(final HttpExchange httpExchange) {
         URI requestURI = httpExchange.getRequestURI();

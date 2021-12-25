@@ -7,6 +7,9 @@ import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The server.
+ */
 public class Server {
 
     private HttpServer server;
@@ -16,6 +19,9 @@ public class Server {
         this.handlers.putAll(handlers);
     }
 
+    /**
+     * The method that starts server.
+     */
     public void start() {
         try {
             server = HttpServer.create();
@@ -27,6 +33,9 @@ public class Server {
         }
     }
 
+    /**
+     * The method that stops server.
+     */
     public void stop() {
         server.stop(1);
     }
