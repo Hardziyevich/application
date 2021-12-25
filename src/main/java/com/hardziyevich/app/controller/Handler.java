@@ -4,43 +4,31 @@ import com.sun.net.httpserver.HttpExchange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.net.URI;
+import java.io.IOException;
 
 import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.STATUS_NOT_FOUND;
 
-public class Handler {
+public record Handler(Controller controller) {
 
     private static final Logger log = LoggerFactory.getLogger(Handler.class);
 
-    private static final String REG_CAPACITOR = "/capacitor.++";
-    private static final String REG_RESISTOR = "/resistor.++";
-
-    private Controller controller;
-
     public void handle(final HttpExchange httpExchange) {
         try {
-            URI requestURI = httpExchange.getRequestURI();
-            String pathURI = requestURI.getPath();
-            if (pathURI.matches(REG_CAPACITOR)) {
-                controller = new ControllerCapacitor();
-                controller.execute(httpExchange);
-            } else if (pathURI.matches(REG_RESISTOR)) {
-                System.out.println(pathURI);
-            }
+            controller.execute(httpExchange);
         } catch (final Exception e) {
-            handle(httpExchange, e);
+            log.warn("Something happened {}", (Object) e.getStackTrace());
+            handleException(httpExchange);
         } finally {
             httpExchange.close();
         }
     }
 
-    void handle(final HttpExchange httpExchange, final Throwable throwable) {
-        log.warn("Something happened {}", (Object) throwable.getStackTrace());
+    private void handleException(final HttpExchange httpExchange) {
         try {
             httpExchange.sendResponseHeaders(STATUS_NOT_FOUND, 0);
         } catch (IOException e) {
-            log.warn("Exception while reading request body from JSON {}", e.getMessage());
+            throw new RuntimeException(e);
         }
     }
+
 }

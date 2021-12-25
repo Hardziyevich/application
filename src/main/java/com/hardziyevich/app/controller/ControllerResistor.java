@@ -1,9 +1,10 @@
 package com.hardziyevich.app.controller;
 
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.hardziyevich.app.service.dto.CreateDto;
+import com.hardziyevich.app.dao.impl.ResistorDao;
 import com.hardziyevich.app.service.Service;
-import com.hardziyevich.app.service.impl.ServiceCapacitor;
+import com.hardziyevich.app.service.impl.ServiceResistor;
+import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -11,17 +12,18 @@ import java.net.URI;
 import java.util.*;
 
 import static com.hardziyevich.app.controller.Attributes.*;
+import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.DEFAULT;
 
-class ControllerCapacitor extends Controller {
+public class ControllerResistor extends Controller {
 
     private final Service service;
 
-    public ControllerCapacitor(final Service service) {
+    public ControllerResistor(final Service service) {
         this.service = service;
     }
 
     @Override
-    boolean delete(final HttpExchange httpExchange) {
+    boolean delete(HttpExchange httpExchange) {
         URI uri = httpExchange.getRequestURI();
         Optional<String> id = readAttributes(uri, ID);
         boolean result = false;
@@ -32,38 +34,37 @@ class ControllerCapacitor extends Controller {
     }
 
     @Override
-    boolean create(final HttpExchange httpExchange) {
+    List<JsonObject> search(HttpExchange httpExchange) {
+        URI requestURI = httpExchange.getRequestURI();
+        Map<Attributes, String> attributes = new HashMap<>();
+        searchAttributeUrl(requestURI, attributes);
+        return service.search(attributes);
+    }
+
+    @Override
+    boolean create(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
-        CreateDto capacitorDto = CreateDto.builder()
+        CreateDto dto = CreateDto.builder()
                 .value(jsonObject.getString(VALUE))
                 .unit(jsonObject.getString(UNIT))
-                .voltage(jsonObject.getString(VOLTAGE))
+                .power(jsonObject.getString(POWER))
                 .caseValue(jsonObject.getString(CASE))
                 .tempLow(jsonObject.getString(TEMP_LOW))
                 .tempHigh(jsonObject.getString(TEMP_HIGH))
                 .build();
-
-        return service.create(capacitorDto);
+        return service.create(dto);
     }
 
     @Override
-    boolean update(final HttpExchange httpExchange) {
+    boolean update(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
         UpdateDto build = UpdateDto.builder()
                 .id(jsonObject.getString(ID))
                 .value(jsonObject.getString(VALUE))
                 .unit(jsonObject.getString(UNIT))
-                .voltage(jsonObject.getString(VOLTAGE))
+                .power(jsonObject.getString(POWER))
                 .build();
         return service.update(build);
-    }
-
-    @Override
-    List<JsonObject> search(final HttpExchange httpExchange) {
-        URI requestURI = httpExchange.getRequestURI();
-        Map<Attributes, String> attributes = new HashMap<>();
-        searchAttributeUrl(requestURI, attributes);
-        return service.search(attributes);
     }
 
 }

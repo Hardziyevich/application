@@ -5,11 +5,14 @@ import lombok.Value;
 
 @Value
 @Builder
-public class UpdateCapacitorDto {
+public class CreateDto {
 
-    String id;
     String value;
     String unit;
     String voltage;
+    String power;
+    String caseValue;
+    String tempLow;
+    String tempHigh;
 
 }

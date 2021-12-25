@@ -1,6 +1,5 @@
 package com.hardziyevich.app.dao.impl;
 
-import com.hardziyevich.app.util.PropertiesUtil;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
@@ -14,29 +13,53 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-enum ConnectionPool {
+public enum ConnectionPool {
 
-    INSTANCE;
+    INSTANCE();
 
     private static final Logger log = LoggerFactory.getLogger(ConnectionPool.class);
-
-    private static final String PASSWORD_KEY = "db.password";
-    private static final String USERNAME_KEY = "db.username";
-    private static final String URL_KEY = "db.url";
-    private static final String POOL_SIZE = "db.pool";
-    private static final String SQL_DRIVER = "db.driver";
+    private static final String SQL_DRIVER = "org.postgresql.Driver";
     private static final Integer DEFAULT_POOL_SIZE = 5;
+
+    private String passwordKey;
+    private String usernameKey;
+    private String urlKey;
+    private String poolSize;
 
     private BlockingQueue<Connection> pool;
     private List<Connection> sourceConnection;
 
     ConnectionPool() {
+    }
+
+    ConnectionPool passwordKey(String passwordKey) {
+        this.passwordKey = passwordKey;
+        return this;
+    }
+
+    ConnectionPool usernameKey(String usernameKey) {
+        this.usernameKey = usernameKey;
+        return this;
+    }
+
+    ConnectionPool urlKey(String urlKey) {
+        this.urlKey = urlKey;
+        return this;
+    }
+
+    ConnectionPool poolSize(String poolSize) {
+        this.poolSize = poolSize;
+        return this;
+    }
+
+    ConnectionPool build() {
         loadDriver();
         initConnectionPool();
+        return this;
     }
 
     private void initConnectionPool() {
-        String poolSizeValue = PropertiesUtil.get(POOL_SIZE);
+        String poolSizeValue = poolSize;
         int size = poolSizeValue == null ? DEFAULT_POOL_SIZE : Integer.parseInt(poolSizeValue);
         pool = new ArrayBlockingQueue<>(size);
         sourceConnection = new ArrayList<>(size);
@@ -80,6 +103,7 @@ enum ConnectionPool {
             sourceConnection.add(connection);
         } catch (SQLException e) {
             log.warn("Something wrong {}", e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -96,15 +120,15 @@ enum ConnectionPool {
 
     private DataSource postgreSqlDataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setURL(PropertiesUtil.get(URL_KEY));
-        dataSource.setUser(PropertiesUtil.get(USERNAME_KEY));
-        dataSource.setPassword(PropertiesUtil.get(PASSWORD_KEY));
+        dataSource.setURL(urlKey);
+        dataSource.setUser(usernameKey);
+        dataSource.setPassword(passwordKey);
         return dataSource;
     }
 
     private void loadDriver() {
         try {
-            Class.forName(PropertiesUtil.get(SQL_DRIVER));
+            Class.forName(SQL_DRIVER);
         } catch (ClassNotFoundException e) {
             log.warn("Something wrong {}", e.getMessage());
             throw new RuntimeException(e);

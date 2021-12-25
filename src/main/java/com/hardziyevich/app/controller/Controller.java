@@ -14,13 +14,14 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.hardziyevich.app.controller.ConstantHttp.HttpMethod.*;
 import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.*;
 
 
-abstract class Controller {
+public abstract class Controller {
 
     private static final Logger log = LoggerFactory.getLogger(Handler.class);
 
@@ -28,6 +29,14 @@ abstract class Controller {
     static final String REG_POST_UPDATE = "/.+/update";
     static final String REG_ATTRIBUTES_DELIMITER = "&";
     static final String REG_ATTRIBUTE_DELIMITER = "=";
+
+    abstract boolean delete(final HttpExchange httpExchange);
+
+    abstract List<JsonObject> search(final HttpExchange httpExchange);
+
+    abstract boolean create(final HttpExchange httpExchange);
+
+    abstract boolean update(final HttpExchange httpExchange);
 
     public void execute(final HttpExchange httpExchange) throws IOException {
         String requestMethod = httpExchange.getRequestMethod();
@@ -75,6 +84,7 @@ abstract class Controller {
             }
         } catch (IOException | JsonException e) {
             log.warn("Exception while reading request body from JSON {}", e.getMessage());
+            throw new RuntimeException(e);
         }
         return deserialize;
     }
@@ -85,6 +95,7 @@ abstract class Controller {
             log.info(message, value);
         } catch (IOException e) {
             log.warn("Exception while setting response headers {}", e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,7 +104,16 @@ abstract class Controller {
             httpExchange.sendResponseHeaders(status, responseLength);
         } catch (IOException e) {
             log.warn("Exception while setting response headers {}", e.getMessage());
+            throw new RuntimeException(e);
         }
+    }
+
+    protected void searchAttributeUrl(URI requestURI, Map<Attributes, String> attributes) {
+        Arrays.stream(Attributes.values())
+                .forEach(at -> {
+                    Optional<String> attribute = readAttributes(requestURI, at);
+                    attribute.ifPresent(p -> attributes.put(at, p));
+                });
     }
 
     void writeResponse(final HttpExchange httpExchange, List<JsonObject> jsonObjects) throws IOException {
@@ -110,11 +130,4 @@ abstract class Controller {
         }
     }
 
-    abstract boolean delete(final HttpExchange httpExchange);
-
-    abstract List<JsonObject> search(final HttpExchange httpExchange);
-
-    abstract boolean create(final HttpExchange httpExchange);
-
-    abstract boolean update(final HttpExchange httpExchange);
 }

@@ -1,13 +1,20 @@
 package com.hardziyevich.app.dao;
 
-import com.hardziyevich.app.entity.Capacitors;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface JdbcSpecification {
+/**
+ * Provides methode for concat sql request and search filter.
+ * @param <T>
+ */
+public interface JdbcSpecification<T> {
 
-    List<Capacitors> searchFilter(Connection connection) throws SQLException;
-
+    /**
+     * Create sql request in database for search elements.
+     * @param connection connection to data base
+     * @return a list of element
+     * @throws SQLException a sql exception
+     */
+    List<T> searchFilter(Connection connection, String sql) throws SQLException;
 }
