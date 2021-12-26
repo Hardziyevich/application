@@ -1,5 +1,6 @@
 package com.hardziyevich.app.controller;
 
+import com.hardziyevich.app.dao.impl.ConnectionPool;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class Server {
      * The method that stops server.
      */
     public void stop() {
+        ConnectionPool.INSTANCE.destroyPool();
         server.stop(1);
     }
 }

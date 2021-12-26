@@ -1,8 +1,6 @@
 package com.hardziyevich.app.controller;
 
 import com.sun.net.httpserver.HttpExchange;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -13,8 +11,6 @@ import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.ST
  */
 public record Handler(Controller controller) {
 
-    private static final Logger log = LoggerFactory.getLogger(Handler.class);
-
     /**
      * The main method process httpExchange.
      *
@@ -24,7 +20,6 @@ public record Handler(Controller controller) {
         try {
             controller.execute(httpExchange);
         } catch (final Exception e) {
-            log.warn("Something happened {}", (Object) e.getStackTrace());
             handleException(httpExchange);
         } finally {
             httpExchange.close();

@@ -10,14 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public enum ConnectionPool {
 
     INSTANCE();
 
-    private static final Logger log = LoggerFactory.getLogger(ConnectionPool.class);
     private static final String SQL_DRIVER = "org.postgresql.Driver";
     private static final Integer DEFAULT_POOL_SIZE = 5;
 
@@ -83,7 +79,6 @@ public enum ConnectionPool {
                 connection = openConnection();
             }
         } catch (InterruptedException | SQLException e) {
-            log.warn("Something wrong {}", e.getMessage());
             Thread.currentThread().interrupt();
         }
         return connection;
@@ -102,7 +97,6 @@ public enum ConnectionPool {
             pool.add((Connection) proxyConnection);
             sourceConnection.add(connection);
         } catch (SQLException e) {
-            log.warn("Something wrong {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -112,7 +106,6 @@ public enum ConnectionPool {
             try {
                 connection.close();
             } catch (SQLException e) {
-                log.warn("Something wrong {}", e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -130,7 +123,6 @@ public enum ConnectionPool {
         try {
             Class.forName(SQL_DRIVER);
         } catch (ClassNotFoundException e) {
-            log.warn("Something wrong {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }

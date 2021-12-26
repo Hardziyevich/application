@@ -9,6 +9,7 @@ Software represent CRUD application. That is allowed to manipulation set of pass
 * JDK 16+;<br/>
 * Maven 3.6+;<br/>
 * Database PostgreSQL.<br/>
+* Docker-machine.<br/>
 
 #Functional requirements
 
@@ -46,6 +47,9 @@ Main structure database represents on pictures.
 ![img_1.png](img_1.png)
 
 #Use case
+
+$ git clone https://github.com/Hardziyevich/application
+
 
 ###Create capacitor:
 
@@ -185,3 +189,15 @@ Json body:</br>
 #Test case
 
 All application covered integration test.
+
+#User guide
+
+$ git clone https://github.com/Hardziyevich/application </br>
+$ cd ./application</br>
+$ mvn clean package</br>
+$ cd ./target</br>
+$ java -jar root.jar</br>
+
+If you want to stop application You will need to send http request:</br>
+http://localhost:8081/stop </br>
+Method:DELETE

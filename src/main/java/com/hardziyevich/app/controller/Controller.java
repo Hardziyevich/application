@@ -6,8 +6,6 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URI;
@@ -24,8 +22,6 @@ import static com.hardziyevich.app.controller.ConstantHttp.HttpResponseStatus.*;
  * Provides methods CRUD and support methods for processing http request and response.
  */
 public abstract class Controller {
-
-    private static final Logger log = LoggerFactory.getLogger(Handler.class);
 
     static final String REG_POST_CREATE = "/.+/create";
     static final String REG_POST_UPDATE = "/.+/update";
@@ -128,7 +124,6 @@ public abstract class Controller {
                 deserialize = (JsonObject) Jsoner.deserialize(reader);
             }
         } catch (IOException | JsonException e) {
-            log.warn("Exception while reading request body from JSON {}", e.getMessage());
             throw new RuntimeException(e);
         }
         return deserialize;
@@ -152,7 +147,6 @@ public abstract class Controller {
         try {
             httpExchange.sendResponseHeaders(status, responseLength);
         } catch (IOException e) {
-            log.warn("Exception while setting response headers {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -174,9 +168,7 @@ public abstract class Controller {
     private void notSupportRequest(final HttpExchange httpExchange, final String value, final String message) {
         try {
             httpExchange.sendResponseHeaders(STATUS_NOT_FOUND, 0);
-            log.info(message, value);
         } catch (IOException e) {
-            log.warn("Exception while setting response headers {}", e.getMessage());
             throw new RuntimeException(e);
         }
     }

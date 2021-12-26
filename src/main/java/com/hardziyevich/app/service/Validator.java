@@ -1,8 +1,5 @@
 package com.hardziyevich.app.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -15,7 +12,6 @@ public class Validator<T> {
 
     private final T object;
     private final List<String> messages = new ArrayList<>();
-    private static final Logger log = LoggerFactory.getLogger(Validator.class);
 
     private Validator(T object) {
         this.object = object;
@@ -35,7 +31,6 @@ public class Validator<T> {
     public Validator<T> validator(Predicate<T> predicate, String message) {
         if (!predicate.test(object)) {
             messages.add(message);
-            log.warn(message);
         }
         return this;
     }

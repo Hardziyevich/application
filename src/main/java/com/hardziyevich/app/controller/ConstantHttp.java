@@ -41,6 +41,7 @@ public final class ConstantHttp {
 
         public static final String CAPACITOR_PATH = "/capacitor";
         public static final String RESISTOR_PATH = "/resistor";
+        public static final String STOP_PATH = "/stop";
     }
 
 }
