@@ -198,7 +198,7 @@ $ git clone https://github.com/Hardziyevich/application </br>
 $ cd ./application</br>
 $ mvn clean package</br>
 $ docker build -t jar -f docker/Dockerfile . </br>
-$ cd ./docker-compose
+$ cd ./docker-compose</br>
 $docker compose up
 
 If you want to stop application You will need to send http request:</br>
