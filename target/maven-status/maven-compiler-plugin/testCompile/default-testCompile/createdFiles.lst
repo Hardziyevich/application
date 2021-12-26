@@ -1,0 +1,10 @@
+com\hardziyevich\app\dao\TestContainer.class
+com\hardziyevich\app\controller\Client$Builder.class
+com\hardziyevich\app\controller\ControllerResistorTest.class
+com\hardziyevich\app\controller\Client.class
+com\hardziyevich\app\service\ServiceResistorTest.class
+com\hardziyevich\app\controller\ControllerCapacitorTest.class
+com\hardziyevich\app\dao\TestContainer$InitDB.class
+com\hardziyevich\app\dao\CapacitorDaoTest.class
+com\hardziyevich\app\service\ServiceCapacitorTest.class
+com\hardziyevich\app\dao\ResistorDaoTest.class

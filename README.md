@@ -192,11 +192,14 @@ All application covered integration test.
 
 #User guide
 
+###Compile project and create container
+
 $ git clone https://github.com/Hardziyevich/application </br>
 $ cd ./application</br>
 $ mvn clean package</br>
-$ cd ./target</br>
-$ java -jar root.jar</br>
+$ docker build -t jar -f docker/Dockerfile . </br>
+$ cd ./docker-compose
+$docker compose up
 
 If you want to stop application You will need to send http request:</br>
 http://localhost:8081/stop </br>

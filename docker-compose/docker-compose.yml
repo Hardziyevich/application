@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=das2632337
+      - POSTGRES_DB=postgres
+    ports:
+      - "6323:5432"
+    volumes:
+      - .:/docker-entrypoint-initdb.d
+      - ./pgdata:/var/lib/postgresql/data
+  app:
+    container_name: jar
+    image: jar
+    restart: always
+    ports:
+      - "8081:8081"

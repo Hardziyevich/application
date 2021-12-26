@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.hardziyevich.app.dao.ResistorDaoTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.546 s - in com.hardziyevich.app.dao.ResistorDaoTest
