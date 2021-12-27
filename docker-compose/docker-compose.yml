@@ -12,10 +12,12 @@ services:
       - "6323:5432"
     volumes:
       - .:/docker-entrypoint-initdb.d
-      - ./pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql
   app:
     container_name: jar
     image: jar
+    depends_on:
+      - db
     restart: always
     ports:
       - "8081:8081"
