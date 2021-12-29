@@ -36,4 +36,4 @@ build/
 src/**/*.log
 src/**/log4j.xml
 src/**/*.pdf
-**target
+target/
