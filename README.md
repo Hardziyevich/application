@@ -201,6 +201,22 @@ $ docker build -t jar -f docker/Dockerfile . </br>
 $ cd ./docker-compose</br>
 $docker compose up
 
+curl example for request: 
+
+Capacitor:</br>
+
+Search: curl -X GET http://localhost:8081/capacitor/search?case=0603 </br>
+Delete: curl -X DELETE http://localhost:8081/capacitor/delete?id=1 </br>
+Update: curl -X POST http://localhost:8081/capacitor/update -H 'Content-Type: application/json' -d '{"id":1,"value":200,"unit":"pF","voltage":"11V"}' </br>
+Create: curl -X POST http://localhost:8081/resistor/create -H 'Content-Type: application/json' -d '{"value":15,"unit":"pF","voltage":"25V","case":"0402","temp-low":"-55°C","temp-high":"+125°C"}' </br>
+
+Resistor:</br>
+
+Search: curl http://localhost:8081/capacitor/search?value=10&unit=kOhm </br>
+Delete: curl -X DELETE http://localhost:8081/resistor/delete?id=1 </br>
+Update: curl -X POST http://localhost:8081/resistor/update -H 'Content-Type: application/json' -d '{"id":1,"value":120,"unit":"Ohm","power":"0.25W"}' </br>
+Create: curl -X POST http://localhost:8081/resistor/create -H 'Content-Type: application/json' -d '{"value":15,"unit":"kOhm","power":"0.1W","case":"0402","temp-low":"-55°C","temp-high":"+125°C"}' </br>
+
 If you want to stop application You will need to send http request:</br>
 http://localhost:8081/stop </br>
 Method:DELETE

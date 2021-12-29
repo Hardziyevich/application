@@ -25,6 +25,8 @@ public abstract class Controller {
 
     static final String REG_POST_CREATE = "/.+/create";
     static final String REG_POST_UPDATE = "/.+/update";
+    static final String REG_DELETE = "/.+/delete";
+    static final String REG_GET_SEARCH = "/.+/search";
     static final String REG_ATTRIBUTES_DELIMITER = "&";
     static final String REG_ATTRIBUTE_DELIMITER = "=";
 
@@ -73,11 +75,19 @@ public abstract class Controller {
 
         switch (requestMethod) {
             case GET -> {
-                List<JsonObject> search = search(httpExchange);
-                writeResponse(httpExchange, search);
+                if (requestType.matches(REG_GET_SEARCH)) {
+                    List<JsonObject> search = search(httpExchange);
+                    writeResponse(httpExchange, search);
+                } else {
+                    response(httpExchange, STATUS_NOT_FOUND, -1);
+                }
             }
             case DELETE -> {
-                typeRequest = delete(httpExchange) ? STATUS_NO_CONTENT : STATUS_NOT_FOUND;
+                if (requestType.matches(REG_DELETE)) {
+                    typeRequest = delete(httpExchange) ? STATUS_NO_CONTENT : STATUS_NOT_FOUND;
+                } else {
+                    typeRequest = STATUS_NOT_FOUND;
+                }
                 response(httpExchange, typeRequest, -1);
             }
             case POST -> {
