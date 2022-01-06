@@ -40,7 +40,7 @@ class ControllerCapacitor extends Controller {
      * {@inheritDoc}
      */
     @Override
-    boolean create(final HttpExchange httpExchange) {
+    long create(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
         CreateDto capacitorDto = CreateDto.builder()
                 .value(jsonObject.getString(VALUE))
@@ -50,7 +50,6 @@ class ControllerCapacitor extends Controller {
                 .tempLow(jsonObject.getString(TEMP_LOW))
                 .tempHigh(jsonObject.getString(TEMP_HIGH))
                 .build();
-
         return service.create(capacitorDto);
     }
 
@@ -58,7 +57,7 @@ class ControllerCapacitor extends Controller {
      * {@inheritDoc}
      */
     @Override
-    boolean update(final HttpExchange httpExchange) {
+    long update(final HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
         UpdateDto build = UpdateDto.builder()
                 .id(jsonObject.getString(ID))

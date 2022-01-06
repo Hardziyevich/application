@@ -91,4 +91,10 @@ final class SqlCommand {
 
     }
 
+    final static class Constant {
+
+        private Constant() { throw new UnsupportedOperationException();}
+
+        static final long INVALID_RESULT = -1;
+    }
 }

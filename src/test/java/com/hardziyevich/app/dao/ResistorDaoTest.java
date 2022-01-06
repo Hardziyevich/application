@@ -119,7 +119,7 @@ public class ResistorDaoTest {
                 .unit("Ohm")
                 .power("0.1W")
                 .build();
-        assertTrue(resistors.create(createDto));
+        assertEquals(6,resistors.create(createDto));
     }
 
     @Test
@@ -137,6 +137,18 @@ public class ResistorDaoTest {
                 .power("0.1W")
                 .value("123")
                 .build();
-        assertTrue(resistors.update(updateDto));
+        assertEquals(Long.parseLong(updateDto.getId()),resistors.update(updateDto));
+    }
+
+    @Test
+    @DisplayName("Update resistors by invalid id")
+    void updateInvalidId() {
+        UpdateDto updateDto = UpdateDto.builder()
+                .id("20")
+                .unit("pF")
+                .voltage("50V")
+                .value("123")
+                .build();
+        assertEquals(-1,resistors.update(updateDto));
     }
 }

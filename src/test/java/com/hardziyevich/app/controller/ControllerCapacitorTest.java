@@ -67,7 +67,9 @@ public class ControllerCapacitorTest {
                 .content(content)
                 .build();
         client.sendRequest();
-        assertEquals(STATUS_CREATED, client.getResponseCode());
+        assertAll(() -> {
+            assertEquals(STATUS_CREATED, client.getResponseCode());
+        });
     }
 
     @Test
@@ -75,19 +77,23 @@ public class ControllerCapacitorTest {
     void update() {
         String content = """
                 {\s
-                    "id":5,
+                    "id":9,
                     "value":193,\s
                     "unit":"pF",\s
                     "voltage":"11V"
                 }\s
                 """;
+        String result = "{\"id\":9}";
         Client client = new Client.Builder()
                 .url("http://localhost:8081/capacitor/update")
                 .requestMethod(POST)
                 .content(content)
                 .build();
         client.sendRequest();
-        assertEquals(STATUS_CREATED, client.getResponseCode());
+        assertAll(() -> {
+            assertEquals(STATUS_CREATED, client.getResponseCode());
+            assertEquals(result, client.getResponse());
+        });
     }
 
     @Test
@@ -110,9 +116,9 @@ public class ControllerCapacitorTest {
                 .requestMethod(GET)
                 .build();
         client.sendRequest();
-        assertAll(()->{
-            assertEquals("{\"unit\":\"pF\",\"temp-high\":\"+175°C\",\"temp-low\":\"-65°C\",\"value\":10,\"case\":\"0402\",\"voltage\":\"25V\"}",client.getResponse());
-            assertEquals(STATUS_OK,client.getResponseCode());
+        assertAll(() -> {
+            assertEquals("{\"unit\":\"pF\",\"temp-high\":\"+175°C\",\"temp-low\":\"-65°C\",\"value\":10,\"case\":\"0402\",\"voltage\":\"25V\"}", client.getResponse());
+            assertEquals(STATUS_OK, client.getResponseCode());
         });
     }
 }

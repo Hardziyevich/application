@@ -6,6 +6,7 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URI;
@@ -50,17 +51,17 @@ public abstract class Controller {
      * Processing a http request for create element in database.
      *
      * @param httpExchange a http exchange.
-     * @return a boolean result.
+     * @return a long result.
      */
-    abstract boolean create(final HttpExchange httpExchange);
+    abstract long create(final HttpExchange httpExchange);
 
     /**
      * Processing a http request for update element in database.
      *
      * @param httpExchange a http exchange.
-     * @return a boolean result.
+     * @return a long result.
      */
-    abstract boolean update(final HttpExchange httpExchange);
+    abstract long update(final HttpExchange httpExchange);
 
     /**
      * The main method that processing request method and delivering particular request in right method.
@@ -77,7 +78,7 @@ public abstract class Controller {
             case GET -> {
                 if (requestType.matches(REG_GET_SEARCH)) {
                     List<JsonObject> search = search(httpExchange);
-                    writeResponse(httpExchange, search);
+                    writeResponse(httpExchange, search,STATUS_OK);
                 } else {
                     response(httpExchange, STATUS_NOT_FOUND, -1);
                 }
@@ -91,12 +92,19 @@ public abstract class Controller {
                 response(httpExchange, typeRequest, -1);
             }
             case POST -> {
+                JsonObject jsonObject = new JsonObject();
+                long id;
+                int status;
                 if (requestType.matches(REG_POST_CREATE)) {
-                    typeRequest = create(httpExchange) ? STATUS_CREATED : STATUS_NOT_FOUND;
-                    response(httpExchange, typeRequest, -1);
+                    id = create(httpExchange);
+                    jsonObject.put(Attributes.ID,id);
+                    status = id < 0 ? STATUS_NOT_FOUND : STATUS_CREATED;
+                    writeResponse(httpExchange,List.of(jsonObject),status);
                 } else if (requestType.matches(REG_POST_UPDATE)) {
-                    typeRequest = update(httpExchange) ? STATUS_CREATED : STATUS_NOT_FOUND;
-                    response(httpExchange, typeRequest, -1);
+                    id = update(httpExchange);
+                    jsonObject.put(Attributes.ID,id);
+                    status = id < 0 ? STATUS_NOT_FOUND : STATUS_CREATED;
+                    writeResponse(httpExchange,List.of(jsonObject),status);
                 } else {
                     notSupportRequest(httpExchange, requestType, "Request type {} does noy support");
                 }
@@ -161,14 +169,14 @@ public abstract class Controller {
         }
     }
 
-    private void writeResponse(final HttpExchange httpExchange, List<JsonObject> jsonObjects) throws IOException {
+    private void writeResponse(final HttpExchange httpExchange, List<JsonObject> jsonObjects, int status) throws IOException {
         Headers responseHeaders = httpExchange.getResponseHeaders();
         StringBuilder db = new StringBuilder();
         for (JsonObject jsonObject : jsonObjects) {
             db.append(jsonObject.toJson());
         }
         responseHeaders.add("Content-type", "application/json");
-        response(httpExchange, STATUS_OK, db.toString().getBytes(StandardCharsets.UTF_8).length);
+        response(httpExchange, status, db.toString().getBytes(StandardCharsets.UTF_8).length);
         try (OutputStream responseBody = httpExchange.getResponseBody()) {
             responseBody.write(db.toString().getBytes(StandardCharsets.UTF_8));
             responseBody.flush();

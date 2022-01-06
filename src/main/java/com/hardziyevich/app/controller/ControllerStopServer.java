@@ -31,14 +31,14 @@ public class ControllerStopServer extends Controller{
      * {@inheritDoc}
      */
     @Override
-    boolean create(HttpExchange httpExchange) {
+    long create(HttpExchange httpExchange) {
         throw new UnsupportedOperationException();
     }
     /**
      * {@inheritDoc}
      */
     @Override
-    boolean update(HttpExchange httpExchange) {
+    long update(HttpExchange httpExchange) {
         throw new UnsupportedOperationException();
     }
 

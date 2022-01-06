@@ -16,13 +16,10 @@ import static com.hardziyevich.app.dao.TestContainer.InitDB.createDb;
 import static com.hardziyevich.app.dao.TestContainer.InitDB.destroyDb;
 import static com.hardziyevich.app.dao.impl.ConnectionPoolAbstract.Type.FLEXIBLE;
 import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.*;
-import static com.hardziyevich.app.dao.impl.ConnectionPoolFabric.PropertiesFile.POOL_SIZE;
 
 public class TestContainer extends PostgreSQLContainer<TestContainer> {
 
     private static final Map<String, String> attributes = new HashMap<>();
-    private static final Logger log = LoggerFactory.getLogger(TestContainer.class);
-    private static boolean createDbFlag = false;
     private static TestContainer container;
     private static ConnectionPool connectionPool;
 
@@ -33,9 +30,6 @@ public class TestContainer extends PostgreSQLContainer<TestContainer> {
     @Override
     public void start() {
         super.start();
-        log.warn("container.getPassword() - {}", container.getPassword());
-        log.warn("container.getUsername() - {}", container.getUsername());
-        log.warn("container.getJdbcUrl() - {}", container.getJdbcUrl());
         attributes.put(PASSWORD_KEY, container.getPassword());
         attributes.put(USERNAME_KEY, container.getUsername());
         attributes.put(URL_KEY, container.getJdbcUrl());
@@ -43,10 +37,8 @@ public class TestContainer extends PostgreSQLContainer<TestContainer> {
         connectionPool = ConnectionPoolAbstract.connectionPool(FLEXIBLE, attributes);
         try (Connection connection = connectionPool.openConnection();
              Statement statement = connection.createStatement()) {
-            if (createDbFlag) {
-                statement.execute(destroyDb);
-            }
-            createDbFlag = statement.execute(createDb);
+            statement.execute(destroyDb);
+            statement.execute(createDb);
             statement.executeUpdate(insertDb);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,14 +62,14 @@ public class TestContainer extends PostgreSQLContainer<TestContainer> {
     static class InitDB {
 
         public static final String destroyDb = """
-                DROP TABLE electronics.resistors;
-                DROP TABLE electronics.capacitors;
-                DROP TABLE electronics.operating_temperature;
-                DROP TABLE electronics.case_size;
-                DROP SCHEMA electronics;
+                DROP TABLE IF EXISTS electronics.resistors;
+                DROP TABLE IF EXISTS electronics.capacitors;
+                DROP TABLE IF EXISTS electronics.operating_temperature;
+                DROP TABLE IF EXISTS electronics.case_size;
+                DROP SCHEMA IF EXISTS electronics;
                 """;
         public static final String createDb = """
-                CREATE SCHEMA electronics;
+                CREATE SCHEMA IF NOT EXISTS  electronics;
                             
                 CREATE TABLE IF NOT EXISTS electronics.operating_temperature
                 (

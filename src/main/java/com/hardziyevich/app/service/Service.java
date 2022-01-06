@@ -25,17 +25,17 @@ public interface Service {
      * Validation dto data and send request to dao
      *
      * @param dto a request from user
-     * @return a boolean result
+     * @return a long provides id element in element table
      */
-    boolean create(CreateDto dto);
+    long create(CreateDto dto);
 
     /**
      * Create request to dao and validation dto request
      *
-     * @param capacitorDto a request from user
-     * @return a boolean result
+     * @param dto a request from user
+     * @return a long provides id element in element table
      */
-    boolean update(UpdateDto capacitorDto);
+    long update(UpdateDto dto);
 
     /**
      * Validation input data and create request to dao
@@ -54,5 +54,7 @@ public interface Service {
         public static final String REG_POWER = "\\d+\\.?\\d+W";
         public static final String REG_TEMP_LOW = "-\\d+\\u00B0C";
         public static final String REG_TEMP_HIGH = "\\+\\d+\\u00B0C";
+
+        public static final long INVALID_RESULT = -1;
     }
 }

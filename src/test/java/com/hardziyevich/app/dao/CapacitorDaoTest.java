@@ -128,7 +128,7 @@ public class CapacitorDaoTest {
                 .unit("pF")
                 .voltage("25V")
                 .build();
-        assertTrue(capacitors.create(createDto));
+        assertEquals(9,capacitors.create(createDto));
     }
 
     @Test
@@ -146,6 +146,18 @@ public class CapacitorDaoTest {
                 .voltage("50V")
                 .value("123")
                 .build();
-        assertTrue(capacitors.update(updateDto));
+        assertEquals(Long.parseLong(updateDto.getId()),capacitors.update(updateDto));
+    }
+
+    @Test
+    @DisplayName("Update capacitors")
+    void updateInvalidId() {
+        UpdateDto updateDto = UpdateDto.builder()
+                .id("20")
+                .unit("pF")
+                .voltage("50V")
+                .value("123")
+                .build();
+        assertEquals(-1,capacitors.update(updateDto));
     }
 }

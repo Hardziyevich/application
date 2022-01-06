@@ -9,6 +9,7 @@ import com.hardziyevich.app.service.dto.UpdateDto;
 import java.sql.*;
 import java.util.*;
 
+import static com.hardziyevich.app.dao.impl.SqlCommand.Constant.INVALID_RESULT;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Insert.*;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Delete.*;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Select.SELECT;
@@ -33,11 +34,11 @@ public class CapacitorDao implements ElementDao<Capacitors> {
      * {@inheritDoc}
      */
     @Override
-    public boolean create(CreateDto request) {
-        int result = 0;
+    public long create(CreateDto request) {
+        long result = INVALID_RESULT;
         String command = INSERT.formatted(TABLE_CAPACITORS, INSERT_SETTING_CAPACITORS, TABLE_CASE, TABLE_TEMPERATURE);
         try (Connection connection = connectionPool.openConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(command)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS)) {
             Object[] seq = {
                     Integer.parseInt(request.getValue()),
                     request.getUnit(),
@@ -48,11 +49,15 @@ public class CapacitorDao implements ElementDao<Capacitors> {
             };
             JdbcUtil.setStatement(preparedStatement, seq);
             preparedStatement.execute();
-            result = preparedStatement.getUpdateCount();
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    result = generatedKeys.getLong(1);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return result == 1;
+        return result;
     }
 
     /**
@@ -76,8 +81,8 @@ public class CapacitorDao implements ElementDao<Capacitors> {
      * {@inheritDoc}
      */
     @Override
-    public boolean update(UpdateDto capacitorDto) {
-        boolean result;
+    public long update(UpdateDto capacitorDto) {
+        long result = INVALID_RESULT;
         String sql = UPDATE.formatted(TABLE_CAPACITORS);
         StringBuilder sqlBuilder = new StringBuilder(sql);
         sqlBuilder.append(UPDATE_VALUE).append(UPDATE_COMMA)
@@ -93,7 +98,7 @@ public class CapacitorDao implements ElementDao<Capacitors> {
         try (Connection connection = connectionPool.openConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlBuilder.toString())) {
             JdbcUtil.setStatement(preparedStatement, req);
-            result = preparedStatement.executeUpdate() == 1;
+            result = preparedStatement.executeUpdate() == 1 ? Long.parseLong(capacitorDto.getId()) : result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -108,7 +113,7 @@ public class CapacitorDao implements ElementDao<Capacitors> {
         String sql = SELECT.formatted(SELECT_SETTING_CAPACITORS, TABLE_CAPACITORS);
         List<Capacitors> capacitors = new ArrayList<>();
         try (Connection connection = connectionPool.openConnection()) {
-            capacitors.addAll(jdbcSpecification.searchFilter(connection,sql));
+            capacitors.addAll(jdbcSpecification.searchFilter(connection, sql));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

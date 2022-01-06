@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.hardziyevich.app.controller.Attributes.*;
+import static com.hardziyevich.app.service.Service.RegularExpression.INVALID_RESULT;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -95,13 +96,13 @@ public class ServiceCapacitorTest {
                 .build();
 
         assertAll(() -> {
-            assertFalse(service.create(value));
-            assertFalse(service.create(unit));
-            assertFalse(service.create(tempHigh));
-            assertFalse(service.create(tempLow));
-            assertFalse(service.create(null));
-            assertFalse(service.create(voltage));
-            assertFalse(service.create(nullPower));
+            assertEquals(-1,service.create(value));
+            assertEquals(-1,service.create(unit));
+            assertEquals(-1,service.create(tempHigh));
+            assertEquals(-1,service.create(tempLow));
+            assertEquals(-1,service.create(null));
+            assertEquals(-1,service.create(voltage));
+            assertEquals(-1,service.create(nullPower));
         });
     }
 
@@ -115,8 +116,8 @@ public class ServiceCapacitorTest {
                 .tempLow("-55°C")
                 .tempHigh("+55°C")
                 .build();
-        Mockito.doReturn(true).when(elementDao).create(dto);
-        assertTrue(service.create(dto));
+        Mockito.doReturn((long)1).when(elementDao).create(dto);
+        assertEquals(1,service.create(dto));
     }
 
     @Test
@@ -147,11 +148,11 @@ public class ServiceCapacitorTest {
                 .voltage("not voltage")
                 .build();
         assertAll(() -> {
-            assertFalse(service.update(id));
-            assertFalse(service.update(value));
-            assertFalse(service.update(unit));
-            assertFalse(service.update(null));
-            assertFalse(service.update(voltage));
+            assertEquals(INVALID_RESULT,service.update(id));
+            assertEquals(INVALID_RESULT,service.update(value));
+            assertEquals(INVALID_RESULT,service.update(unit));
+            assertEquals(INVALID_RESULT,service.update(null));
+            assertEquals(INVALID_RESULT,service.update(voltage));
         });
     }
 
@@ -164,8 +165,8 @@ public class ServiceCapacitorTest {
                 .unit("uF")
                 .voltage("25V")
                 .build();
-        Mockito.doReturn(true).when(elementDao).update(test);
-        assertTrue(service.update(test));
+        Mockito.doReturn((long)1).when(elementDao).update(test);
+        assertEquals(1,service.update(test));
     }
 
     @Test

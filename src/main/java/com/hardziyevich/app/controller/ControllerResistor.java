@@ -51,7 +51,7 @@ public class ControllerResistor extends Controller {
      * {@inheritDoc}
      */
     @Override
-    boolean create(HttpExchange httpExchange) {
+    long create(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
         CreateDto dto = CreateDto.builder()
                 .value(jsonObject.getString(VALUE))
@@ -68,7 +68,7 @@ public class ControllerResistor extends Controller {
      * {@inheritDoc}
      */
     @Override
-    boolean update(HttpExchange httpExchange) {
+    long update(HttpExchange httpExchange) {
         JsonObject jsonObject = readRequestFromJson(httpExchange);
         UpdateDto build = UpdateDto.builder()
                 .id(jsonObject.getString(ID))

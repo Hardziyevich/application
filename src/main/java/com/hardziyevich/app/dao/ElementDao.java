@@ -11,11 +11,11 @@ import java.util.List;
 public interface ElementDao<T> {
 
     /**
-     * Create new string in resistors table.
+     * Create new string in element table.
      * @param request a createDto object which contain fields that need to fill for element table.
-     * @return provides whether the request was successful
+     * @return a long provides id element in element table
      */
-    boolean create(CreateDto request);
+    long create(CreateDto request);
 
     /**
      * Delete string in element table.
@@ -27,9 +27,9 @@ public interface ElementDao<T> {
     /**
      * Update string in element table.
      * @param request a createDto object which contain fields that need to update for element table.
-     * @return provides whether the request was successful
+     * @return a long provides id element in element table
      */
-    boolean update(UpdateDto request);
+    long update(UpdateDto request);
 
     /**
      * Search strings in element table.
@@ -37,4 +37,5 @@ public interface ElementDao<T> {
      * @return a list of element which will be found
      */
     List<T> search(JdbcSpecification<T> jdbcSpecification);
+
 }

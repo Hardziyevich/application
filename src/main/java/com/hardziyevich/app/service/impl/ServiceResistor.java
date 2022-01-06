@@ -50,8 +50,8 @@ public class ServiceResistor implements Service {
      * {@inheritDoc}
      */
     @Override
-    public boolean create(CreateDto dto) {
-        boolean result = false;
+    public long create(CreateDto dto) {
+        long result = INVALID_RESULT;
         if (dto != null) {
             try {
                 Validator<CreateDto> validator = Validator.of(dto)
@@ -60,9 +60,9 @@ public class ServiceResistor implements Service {
                         .validator(c -> c.getTempLow().matches(REG_TEMP_LOW), "Resistor temp low contains is not correct value.")
                         .validator(c -> c.getPower().matches(REG_POWER), "Resistor power contains is not correct power value.")
                         .validator(c -> c.getTempHigh().matches(REG_TEMP_HIGH), "Resistor temp high contains is not correct value.");
-                result = validator.isEmpty() && resistorDao.create(validator.get());
+                result = validator.isEmpty() ? resistorDao.create(validator.get()) : result;
             } catch (NullPointerException e) {
-                return false;
+                return result;
             }
         }
         return result;
@@ -72,18 +72,18 @@ public class ServiceResistor implements Service {
      * {@inheritDoc}
      */
     @Override
-    public boolean update(UpdateDto capacitorDto) {
-        boolean result = false;
-        if (capacitorDto != null) {
+    public long update(UpdateDto dto) {
+        long result = INVALID_RESULT;
+        if (dto != null) {
             try {
-                Validator<UpdateDto> validator = Validator.of(capacitorDto)
+                Validator<UpdateDto> validator = Validator.of(dto)
                         .validator(c -> c.getId().matches(REG_DIGIT), "Resistor id is not digit.")
                         .validator(c -> c.getValue().matches(REG_DIGIT), "Resistor value is not digit.")
                         .validator(c -> c.getPower().matches(REG_POWER), "Resistor power contains is not correct power value.")
                         .validator(c -> c.getUnit().matches(REG_UNIT_RESISTOR), "Resistor contains is not correct unit.");
-                result = validator.isEmpty() && resistorDao.update(validator.get());
+                result = validator.isEmpty() ? resistorDao.update(dto) : result;
             } catch (NullPointerException e) {
-                return false;
+                return result;
             }
         }
         return result;

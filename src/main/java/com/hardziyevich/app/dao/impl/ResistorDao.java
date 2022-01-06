@@ -6,14 +6,13 @@ import com.hardziyevich.app.entity.Resistors;
 import com.hardziyevich.app.service.dto.CreateDto;
 import com.hardziyevich.app.service.dto.UpdateDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.hardziyevich.app.dao.impl.SqlCommand.Constant.INVALID_RESULT;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Delete.DELETE_BY_ID;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Insert.*;
 import static com.hardziyevich.app.dao.impl.SqlCommand.Select.SELECT;
@@ -38,11 +37,11 @@ public class ResistorDao implements ElementDao<Resistors> {
      * {@inheritDoc}
      */
     @Override
-    public boolean create(CreateDto request) {
-        int result = 0;
+    public long create(CreateDto request) {
+        long result = INVALID_RESULT;
         String command = INSERT.formatted(TABLE_RESISTORS, INSERT_SETTING_RESISTORS, TABLE_CASE, TABLE_TEMPERATURE);
         try (Connection connection = connectionPool.openConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(command)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS)) {
             JdbcUtil.setStatement(preparedStatement, new Object[]{
                     Integer.parseInt(request.getValue()),
                     request.getUnit(),
@@ -52,11 +51,15 @@ public class ResistorDao implements ElementDao<Resistors> {
                     request.getTempLow()
             });
             preparedStatement.execute();
-            result = preparedStatement.getUpdateCount();
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    result = generatedKeys.getLong(1);
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return result == 1;
+        return result;
     }
 
     /**
@@ -81,8 +84,8 @@ public class ResistorDao implements ElementDao<Resistors> {
      * {@inheritDoc}
      */
     @Override
-    public boolean update(UpdateDto request) {
-        boolean result = false;
+    public long update(UpdateDto request) {
+        long result = INVALID_RESULT;
         String sql = UPDATE.formatted(TABLE_RESISTORS);
         StringBuilder sqlBuilder = new StringBuilder(sql);
         sqlBuilder.append(UPDATE_VALUE).append(UPDATE_COMMA)
@@ -96,7 +99,7 @@ public class ResistorDao implements ElementDao<Resistors> {
                     request.getUnit(),
                     request.getPower(),
                     Long.parseLong(request.getId())});
-            result = preparedStatement.executeUpdate() == 1;
+            result = preparedStatement.executeUpdate() == 1 ? Long.parseLong(request.getId()) : result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

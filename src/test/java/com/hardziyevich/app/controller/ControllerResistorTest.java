@@ -44,8 +44,8 @@ public class ControllerResistorTest {
 
     @AfterAll
     void stop() {
-        server.stop();
         postgreSQLContainer.stop();
+        server.stop();
     }
 
     @Test
@@ -67,7 +67,9 @@ public class ControllerResistorTest {
                 .content(content)
                 .build();
         client.sendRequest();
-        assertEquals(STATUS_CREATED, client.getResponseCode());
+        assertAll(() -> {
+            assertEquals(STATUS_CREATED, client.getResponseCode());
+        });
     }
 
     @Test
@@ -87,7 +89,11 @@ public class ControllerResistorTest {
                 .content(content)
                 .build();
         client.sendRequest();
-        assertEquals(STATUS_CREATED, client.getResponseCode());
+        String result = "{\"id\":1}";
+        assertAll(() -> {
+            assertEquals(STATUS_CREATED, client.getResponseCode());
+            assertEquals(result, client.getResponse());
+        });
     }
 
     @Test
