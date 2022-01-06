@@ -211,9 +211,6 @@ Update: curl -X POST http://localhost:8081/capacitor/update -H 'Content-Type: ap
 Create: curl -X POST http://localhost:8081/capacitor/create -H 'Content-Type: application/json' -d '{"value":115,"unit":"pF","voltage":"25V","case":"0402","temp-low":"-55°C","temp-high":"+125°C"}' </br>
 
 Resistor:</br>
-<<<<<<< HEAD
-Search: curl -X GET http://localhost:8081/resistor/search?id=1 </br>
-=======
 
 Search: curl -X GET http://localhost:8081/resistor/search?value=10&unit=kOhm </br>
 Delete: curl -X DELETE http://localhost:8081/resistor/delete?id=1 </br>
